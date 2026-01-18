@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified"
+           targetNamespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Driver.CanDriversViaUsbConverter"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Driver.CanDriversViaUsbConverter">
+    <xs:import schemaLocation="xsd2.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+    <xs:import schemaLocation="xsd16.xsd"
+               namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+    <xs:complexType name="FindConvertersResult">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Converters" nillable="true" type="tns:ArrayOfCanConverterAddress"/>
+            <xs:element minOccurs="0" name="MissingDrivers" nillable="true" type="q1:ArrayOfstring"
+                        xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="FindConvertersResult" nillable="true" type="tns:FindConvertersResult"/>
+    <xs:complexType name="ArrayOfCanConverterAddress">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="CanConverterAddress" nillable="true"
+                        type="tns:CanConverterAddress"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfCanConverterAddress" nillable="true" type="tns:ArrayOfCanConverterAddress"/>
+    <xs:complexType name="CanConverterAddress">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="LanCanConverterAddress" nillable="true" type="tns:LanCanConverterAddress"/>
+            <xs:element minOccurs="0" name="Tag" type="tns:CanConverterAddress.TagEnum"/>
+            <xs:element minOccurs="0" name="UsbCanConverterAddress" nillable="true" type="tns:UsbCanConverterAddress"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="CanConverterAddress" nillable="true" type="tns:CanConverterAddress"/>
+    <xs:complexType name="LanCanConverterAddress">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="IpAddress" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+<!--    <xs:element name="LanCanConverterAddress" nillable="true" type="tns:LanCanConverterAddress"/>-->
+    <xs:simpleType name="CanConverterAddress.TagEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Usb"/>
+            <xs:enumeration value="Lan"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="CanConverterAddress.TagEnum" nillable="true" type="tns:CanConverterAddress.TagEnum"/>
+    <xs:complexType name="UsbCanConverterAddress">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Channel" type="xs:int"/>
+            <xs:element minOccurs="0" name="SerialNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Vendor" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="UsbCanConverterAddress" nillable="true" type="tns:UsbCanConverterAddress"/>
+    <xs:complexType name="ArrayOfLanCanConverter">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="LanCanConverter" nillable="true"
+                        type="tns:LanCanConverter"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfLanCanConverter" nillable="true" type="tns:ArrayOfLanCanConverter"/>
+    <xs:complexType name="LanCanConverter">
+        <xs:sequence>
+<!--            <xs:element minOccurs="0" name="Address" nillable="true" type="tns:CanConverterAddress"/>-->
+            <xs:element minOccurs="0" name="ControllerMac" type="xs:unsignedLong"/>
+            <xs:element minOccurs="0" name="ControllerPort" type="xs:unsignedShort"/>
+            <xs:element minOccurs="0" name="Encryption" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="FirmwareMajorVersion" type="xs:unsignedByte"/>
+            <xs:element minOccurs="0" name="FirmwareMinorVersion" type="xs:unsignedByte"/>
+            <xs:element minOccurs="0" name="Gateway" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="HardwareType" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Mask" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="LanCanConverter" nillable="true" type="tns:LanCanConverter"/>
+    <xs:complexType name="FindControllersResult">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Controllers" nillable="true" type="tns:ArrayOfCanDeviceInfo"/>
+            <xs:element minOccurs="0" name="FailedControllers" nillable="true" type="tns:ArrayOfCanDeviceInfo"/>
+            <xs:element minOccurs="0" name="FailedConverters" nillable="true"
+                        type="tns:ArrayOfFindControllersResult.FailedConverterInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="FindControllersResult" nillable="true" type="tns:FindControllersResult"/>
+    <xs:complexType name="ArrayOfCanDeviceInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="CanDeviceInfo" nillable="true"
+                        type="tns:CanDeviceInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfCanDeviceInfo" nillable="true" type="tns:ArrayOfCanDeviceInfo"/>
+    <xs:complexType name="CanDeviceInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="NetConfig" nillable="true" type="tns:CanDeviceNetConfig"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="CanDeviceInfo" nillable="true" type="tns:CanDeviceInfo"/>
+    <xs:complexType name="CanDeviceNetConfig">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="BusAddress" type="xs:unsignedByte"/>
+            <xs:element minOccurs="0" name="ConverterAddress" nillable="true" type="tns:CanConverterAddress"/>
+            <xs:element minOccurs="0" name="DriverFullInfo" nillable="true" type="q2:LDriverFullInfo"
+                        xmlns:q2="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="HardwareType" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="IsEncrypted" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="MajorVersion" type="xs:unsignedByte"/>
+            <xs:element minOccurs="0" name="MinorVersion" type="xs:unsignedByte"/>
+            <xs:element minOccurs="0" name="RawHardwareType" type="xs:unsignedByte"/>
+            <xs:element minOccurs="0" name="SID" type="xs:unsignedInt"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="CanDeviceNetConfig" nillable="true" type="tns:CanDeviceNetConfig"/>
+    <xs:complexType name="ArrayOfFindControllersResult.FailedConverterInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="FindControllersResult.FailedConverterInfo"
+                        nillable="true" type="tns:FindControllersResult.FailedConverterInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfFindControllersResult.FailedConverterInfo" nillable="true"
+                type="tns:ArrayOfFindControllersResult.FailedConverterInfo"/>
+    <xs:complexType name="FindControllersResult.FailedConverterInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ConverterAddress" nillable="true" type="tns:CanConverterAddress"/>
+            <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="FindControllersResult.FailedConverterInfo" nillable="true"
+                type="tns:FindControllersResult.FailedConverterInfo"/>
+    <xs:complexType name="ArrayOfCanDeviceNetConfig">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="CanDeviceNetConfig" nillable="true"
+                        type="tns:CanDeviceNetConfig"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfCanDeviceNetConfig" nillable="true" type="tns:ArrayOfCanDeviceNetConfig"/>
+    <xs:complexType name="SetDevicesAddressBySidResult">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="FailedDevices" nillable="true"
+                        type="tns:ArrayOfSetDevicesAddressBySidResult.FailedAddress"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="SetDevicesAddressBySidResult" nillable="true" type="tns:SetDevicesAddressBySidResult"/>
+    <xs:complexType name="ArrayOfSetDevicesAddressBySidResult.FailedAddress">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="SetDevicesAddressBySidResult.FailedAddress"
+                        nillable="true" type="tns:SetDevicesAddressBySidResult.FailedAddress"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfSetDevicesAddressBySidResult.FailedAddress" nillable="true"
+                type="tns:ArrayOfSetDevicesAddressBySidResult.FailedAddress"/>
+    <xs:complexType name="SetDevicesAddressBySidResult.FailedAddress">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="NetConfig" nillable="true" type="tns:CanDeviceNetConfig"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="SetDevicesAddressBySidResult.FailedAddress" nillable="true"
+                type="tns:SetDevicesAddressBySidResult.FailedAddress"/>
+    <xs:complexType name="GetControllerConfigurationsResult">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Configurations" nillable="true"
+                        type="tns:ArrayOfGetControllerConfigurationsResult.Config"/>
+            <xs:element minOccurs="0" name="FailedDevices" nillable="true"
+                        type="tns:ArrayOfGetControllerConfigurationsResult.FailedConfig"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="GetControllerConfigurationsResult" nillable="true" type="tns:GetControllerConfigurationsResult"/>
+    <xs:complexType name="ArrayOfGetControllerConfigurationsResult.Config">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="GetControllerConfigurationsResult.Config"
+                        nillable="true" type="tns:GetControllerConfigurationsResult.Config"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfGetControllerConfigurationsResult.Config" nillable="true"
+                type="tns:ArrayOfGetControllerConfigurationsResult.Config"/>
+    <xs:complexType name="GetControllerConfigurationsResult.Config">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Configuration" nillable="true" type="q3:ArrayOfLDriverFullInfo"
+                        xmlns:q3="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="NetConfig" nillable="true" type="tns:CanDeviceNetConfig"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="GetControllerConfigurationsResult.Config" nillable="true"
+                type="tns:GetControllerConfigurationsResult.Config"/>
+    <xs:complexType name="ArrayOfGetControllerConfigurationsResult.FailedConfig">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="GetControllerConfigurationsResult.FailedConfig"
+                        nillable="true" type="tns:GetControllerConfigurationsResult.FailedConfig"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfGetControllerConfigurationsResult.FailedConfig" nillable="true"
+                type="tns:ArrayOfGetControllerConfigurationsResult.FailedConfig"/>
+    <xs:complexType name="GetControllerConfigurationsResult.FailedConfig">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="NetConfig" nillable="true" type="tns:CanDeviceNetConfig"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="GetControllerConfigurationsResult.FailedConfig" nillable="true"
+                type="tns:GetControllerConfigurationsResult.FailedConfig"/>
+</xs:schema>

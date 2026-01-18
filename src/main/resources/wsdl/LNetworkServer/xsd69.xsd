@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/">
+    <xs:import schemaLocation="xsd1.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+    <xs:import schemaLocation="xsd54.xsd" namespace="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+    <xs:import schemaLocation="xsd2.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+    <xs:element name="GetDepartmentTree">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="departmentId" nillable="true" type="q1:guid"
+                            xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                <xs:element minOccurs="0" name="isChild" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDepartmentTreeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetDepartmentTreeResult" nillable="true"
+                            type="q2:ArrayOfDepartmentTreeModel"
+                            xmlns:q2="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataForPeriodByDepartments">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="login" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="departmentsIds" nillable="true" type="q3:ArrayOfguid"
+                            xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                <xs:element minOccurs="0" name="startedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="endedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="type" nillable="true" type="q4:ViolationType"
+                            xmlns:q4="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataForPeriodByDepartmentsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetDataForPeriodByDepartmentsResult" nillable="true"
+                            type="q5:ArrayOfDataForPeriodModel"
+                            xmlns:q5="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataForPeriodByDepartmentsDetail">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="login" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="departmentId" type="q6:guid"
+                            xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                <xs:element minOccurs="0" name="startedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="endedOn" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataForPeriodByDepartmentsDetailResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetDataForPeriodByDepartmentsDetailResult" nillable="true"
+                            type="q7:ArrayOfDataForPeriodModel"
+                            xmlns:q7="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetIsPresentInWorkplace">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="departmentsIds" nillable="true" type="q8:ArrayOfguid"
+                            xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                <xs:element minOccurs="0" name="startedOn" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetIsPresentInWorkplaceResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetIsPresentInWorkplaceResult" nillable="true"
+                            type="q9:ArrayOfDataOnPresenceInWorkplace"
+                            xmlns:q9="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAbscenceInWorkplace">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="departmentId" type="q10:guid"
+                            xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                <xs:element minOccurs="0" name="startedOn" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAbscenceInWorkplaceResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetAbscenceInWorkplaceResult" nillable="true" type="q11:ArrayOfAbsent"
+                            xmlns:q11="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataForGraph">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="departmentId" type="q12:guid"
+                            xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                <xs:element minOccurs="0" name="startedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="endedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="type" nillable="true" type="q13:ViolationType"
+                            xmlns:q13="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataForGraphResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetDataForGraphResult" nillable="true" type="q14:ArrayOfDataForViolator"
+                            xmlns:q14="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetProblemDates">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="departmentsIds" nillable="true" type="q15:ArrayOfguid"
+                            xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                <xs:element minOccurs="0" name="startedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="endedOn" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetProblemDatesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetProblemDatesResult" nillable="true" type="q16:ArrayOfDataForViolator"
+                            xmlns:q16="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetSystematicViolation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="userId" type="q17:guid"
+                            xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetSystematicViolationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetSystematicViolationResult" type="xs:double"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetSystematicViolationByLogin">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="login" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetSystematicViolationByLoginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetSystematicViolationByLoginResult" type="xs:double"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SaveSystematicViolation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="userId" type="q18:guid"
+                            xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                <xs:element minOccurs="0" name="percentValue" type="xs:double"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SaveSystematicViolationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SaveSystematicViolationResult" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SaveSystematicViolationByLogin">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="login" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="percentValue" type="xs:double"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SaveSystematicViolationByLoginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SaveSystematicViolationByLoginResult" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetListOfViolations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="userId" type="q19:guid"
+                            xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                <xs:element minOccurs="0" name="departmentsIds" nillable="true" type="q20:ArrayOfguid"
+                            xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                <xs:element minOccurs="0" name="startedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="endedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="type" nillable="true" type="q21:ViolationType"
+                            xmlns:q21="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetListOfViolationsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetListOfViolationsResult" nillable="true" type="q22:ArrayOfViolator"
+                            xmlns:q22="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetListOfViolationsByLogin">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="login" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="departmentsIds" nillable="true" type="q23:ArrayOfguid"
+                            xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                <xs:element minOccurs="0" name="startedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="endedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="type" nillable="true" type="q24:ViolationType"
+                            xmlns:q24="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetListOfViolationsByLoginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetListOfViolationsByLoginResult" nillable="true"
+                            type="q25:ArrayOfViolator"
+                            xmlns:q25="http://schemas.datacontract.org/2004/07/RusGuard.Models"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPhoto">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="UserId" type="q26:guid"
+                            xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPhotoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetPhotoResult" nillable="true" type="xs:base64Binary"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

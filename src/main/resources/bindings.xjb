@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings
+        xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+        xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+        jaxb:extensionBindingPrefixes="xjc"
+        version="2.1">
+
+    <!-- Включаем авторасширение имен для всех схем -->
+    <jaxb:globalBindings>
+        <xjc:simple />
+    </jaxb:globalBindings>
+
+    <!-- ЯВНО указываем для проблемных схем использовать другой режим -->
+    <jaxb:bindings schemaLocation="xsd16.xsd">
+        <jaxb:schemaBindings>
+            <jaxb:package name="com.rusguard.client.xsd16"/>
+        </jaxb:schemaBindings>
+        <!-- Явно включаем генерацию суффиксов -->
+        <jaxb:globalBindings>
+            <xjc:simple />
+        </jaxb:globalBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="xsd67.xsd">
+        <jaxb:schemaBindings>
+            <jaxb:package name="com.rusguard.client.xsd67"/>
+        </jaxb:schemaBindings>
+        <jaxb:globalBindings>
+            <xjc:simple />
+        </jaxb:globalBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="xsd42.xsd">
+        <jaxb:schemaBindings>
+            <jaxb:package name="com.rusguard.client.xsd42"/>
+        </jaxb:schemaBindings>
+        <jaxb:globalBindings>
+            <xjc:simple />
+        </jaxb:globalBindings>
+    </jaxb:bindings>
+
+</jaxb:bindings>

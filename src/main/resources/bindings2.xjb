@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+version="2.1">
+
+<!-- Bindings for xsd1.xsd -->
+<jaxb:bindings schemaLocation="xsd1.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='ArrayOfguid']">
+<jaxb:property name="ArrayOfGuid"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArrayOfstring']">
+<jaxb:property name="ArrayOfString"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArrayOfint']">
+<jaxb:property name="ArrayOfInt"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArrayOfdateTime']">
+<jaxb:property name="ArrayOfDateTime"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArrayOfunsignedShort']">
+<jaxb:property name="ArrayOfUnsignedShort"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArrayOfKeyValueOfstringstring']">
+<jaxb:property name="ArrayOfKeyValueOfStringString"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArrayOfArrayOfKeyValueOfstringstring']">
+<jaxb:property name="ArrayOfArrayOfKeyValueOfStringString"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd2.xsd -->
+<jaxb:bindings schemaLocation="xsd2.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='ArrayOfguid']">
+<jaxb:property name="ArrayOfGuid"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArrayOfstring']">
+<jaxb:property name="ArrayOfString"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArrayOfint']">
+<jaxb:property name="ArrayOfInt"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArrayOfdateTime']">
+<jaxb:property name="ArrayOfDateTime"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd4.xsd -->
+<jaxb:bindings schemaLocation="xsd4.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='ApplicationException']">
+<jaxb:property name="ApplicationException"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='Exception']">
+<jaxb:property name="Exception"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='InvalidOperationException']">
+<jaxb:property name="InvalidOperationException"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='SystemException']">
+<jaxb:property name="SystemException"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArgumentNullException']">
+<jaxb:property name="ArgumentNullException"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ArgumentOutOfRangeException']">
+<jaxb:property name="ArgumentOutOfRangeException"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='TimeoutException']">
+<jaxb:property name="TimeoutException"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='OperationCanceledException']">
+<jaxb:property name="OperationCanceledException"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd24.xsd -->
+<jaxb:bindings schemaLocation="xsd24.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='ArrayOfAcsBoxAccessLevelElementSlimInfo']">
+<jaxb:property name="ArrayOfAcsBoxAccessLevelElementSlimInfo"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='AcsBoxAccessLevelElementSlimInfo']">
+<jaxb:property name="AcsBoxAccessLevelElementSlimInfo"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd25.xsd -->
+<jaxb:bindings schemaLocation="xsd25.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='ArrayOfAcsAccessLevel']">
+<jaxb:property name="ArrayOfAcsAccessLevel"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='AcsAccessLevel']">
+<jaxb:property name="AcsAccessLevel"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd27.xsd -->
+<jaxb:bindings schemaLocation="xsd27.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='AcsBox']">
+<jaxb:property name="AcsBox"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='AcsAccessPoint']">
+<jaxb:property name="AcsAccessPoint"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd30.xsd -->
+<jaxb:bindings schemaLocation="xsd30.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='IssDevice']">
+<jaxb:property name="IssDevice"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd34.xsd -->
+<jaxb:bindings schemaLocation="xsd34.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='ScreenLayout']">
+<jaxb:property name="ScreenLayout"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd35.xsd -->
+<jaxb:bindings schemaLocation="xsd35.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='CameraCellContent']">
+<jaxb:property name="CameraCellContent"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd36.xsd -->
+<jaxb:bindings schemaLocation="xsd36.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='PassInfoCellContent']">
+<jaxb:property name="PassInfoCellContent"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd37.xsd -->
+<jaxb:bindings schemaLocation="xsd37.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='IvidionCamera']">
+<jaxb:property name="IvidionCamera"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd42.xsd -->
+<jaxb:bindings schemaLocation="xsd42.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='ServiceResult']">
+<jaxb:property name="ServiceResult"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='ServiceError']">
+<jaxb:property name="ServiceError"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd52.xsd -->
+<jaxb:bindings schemaLocation="xsd52.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='IPAddress']">
+<jaxb:property name="IPAddress"/>
+</jaxb:bindings>
+<jaxb:bindings node="//xs:element[@name='WebException']">
+<jaxb:property name="WebException"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd63.xsd -->
+<jaxb:bindings schemaLocation="xsd63.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='AddressFamily']">
+<jaxb:property name="AddressFamily"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd64.xsd -->
+<jaxb:bindings schemaLocation="xsd64.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='Win32Exception']">
+<jaxb:property name="Win32Exception"/>
+</jaxb:bindings>
+</jaxb:bindings>
+
+<!-- Bindings for xsd65.xsd -->
+<jaxb:bindings schemaLocation="xsd65.xsd" node="/xs:schema">
+<jaxb:bindings node="//xs:element[@name='ExternalException']">
+<jaxb:property name="ExternalException"/>
+</jaxb:bindings>
+</jaxb:bindings>
+</jaxb:bindings>

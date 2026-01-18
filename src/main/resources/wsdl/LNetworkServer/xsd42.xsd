@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified"
+           targetNamespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.Net.Services.Entities"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.Net.Services.Entities"
+           xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+    <xs:import schemaLocation="xsd16.xsd"
+               namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+    <xs:import schemaLocation="xsd1.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+    <xs:import schemaLocation="xsd2.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+    <xs:complexType name="LNetworkChanges">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="DriversAdded" nillable="true" type="q1:ArrayOfLDriverAdded"
+                        xmlns:q1="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="LinkChanges" nillable="true" type="tns:ArrayOfLLinkChanged"/>
+            <xs:element minOccurs="0" name="NetworksAdded" nillable="true" type="q2:ArrayOfLNetworkAdded"
+                        xmlns:q2="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="OperationResults" nillable="true" type="q3:ArrayOfLOperationResult"
+                        xmlns:q3="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="Properties" nillable="true" type="q4:ArrayOfLResourceProperty"
+                        xmlns:q4="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="ResourcesRemoved" nillable="true" type="q5:ArrayOfLResourceInfo"
+                        xmlns:q5="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="ServersAdded" nillable="true" type="q6:ArrayOfLServerAdded"
+                        xmlns:q6="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="States" nillable="true" type="q7:ArrayOfLResourceProperty"
+                        xmlns:q7="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="LNetworkChanges" nillable="true" type="tns:LNetworkChanges"/>
+    <xs:complexType name="ArrayOfLLinkChanged">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="LLinkChanged" nillable="true"
+                        type="tns:LLinkChanged"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfLLinkChanged" nillable="true" type="tns:ArrayOfLLinkChanged"/>
+    <xs:complexType name="LLinkChanged">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="CUDType" type="q8:CUDType"
+                        xmlns:q8="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="ChildId" type="ser:guid"/>
+            <xs:element minOccurs="0" name="LinkType" type="q9:LinkType"
+                        xmlns:q9="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="ParentId" type="ser:guid"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="LLinkChanged" nillable="true" type="tns:LLinkChanged"/>
+    <xs:complexType name="Operation">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Path" nillable="true" type="q10:ArrayOfguid"
+                        xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="ser:guid"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Operation" nillable="true" type="tns:Operation"/>
+    <xs:complexType name="DeviceOperation">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Operation">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Id" type="ser:guid"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="DeviceOperation" nillable="true" type="tns:DeviceOperation"/>
+    <xs:complexType name="DeviceCallMethodOperation">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:DeviceOperation">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="LogMessageId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="MethodArgs" nillable="true" type="q11:ArrayOfstring"
+                                xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                    <xs:element minOccurs="0" name="MethodName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="DeviceCallMethodOperation" nillable="true" type="tns:DeviceCallMethodOperation"/>
+    <xs:complexType name="ArrayOfLResourcePropertyValues">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="LResourcePropertyValues" nillable="true"
+                        type="tns:LResourcePropertyValues"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfLResourcePropertyValues" nillable="true" type="tns:ArrayOfLResourcePropertyValues"/>
+    <xs:complexType name="LResourcePropertyValues">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="ser:guid"/>
+            <xs:element minOccurs="0" name="Properties" nillable="true" type="tns:ArrayOfLPropertyValue"/>
+            <xs:element minOccurs="0" name="Type" type="q12:ResourceType"
+                        xmlns:q12="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="LResourcePropertyValues" nillable="true" type="tns:LResourcePropertyValues"/>
+    <xs:complexType name="ArrayOfLPropertyValue">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="LPropertyValue" nillable="true"
+                        type="tns:LPropertyValue"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfLPropertyValue" nillable="true" type="tns:ArrayOfLPropertyValue"/>
+    <xs:complexType name="LPropertyValue">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+<!--    <xs:element name="LPropertyValue" nillable="true" type="tns:LPropertyValue"/>-->
+    <xs:complexType name="ArrayOfDeviceDriverInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceDriverInfo" nillable="true"
+                        type="tns:DeviceDriverInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfDeviceDriverInfo" nillable="true" type="tns:ArrayOfDeviceDriverInfo"/>
+    <xs:complexType name="DeviceDriverInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ArrayChilds" nillable="true" type="tns:ArrayOfDeviceDriverInfo"/>
+            <xs:element minOccurs="0" name="ArrayProperties" nillable="true" type="tns:ArrayOfPropertyValue"/>
+            <xs:element minOccurs="0" name="Cameras" nillable="true" type="q13:ArrayOfAccessPoint2CameraChain"
+                        xmlns:q13="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="ChangeVersion" nillable="true" type="xs:long"/>
+            <xs:element minOccurs="0" name="DeviceServerId" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="DirtyArrayProperties" nillable="true" type="tns:ArrayOfPropertyValue"/>
+            <xs:element minOccurs="0" name="DriverType" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="FilterTagIds" nillable="true" type="q14:ArrayOfguid"
+                        xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+            <xs:element minOccurs="0" name="ID" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ParentPropertyName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="State" type="tns:StateType"/>
+            <xs:element minOccurs="0" name="TagIds" nillable="true" type="q15:ArrayOfguid"
+                        xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="DeviceDriverInfo" nillable="true" type="tns:DeviceDriverInfo"/>
+    <xs:complexType name="ArrayOfPropertyValue">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="PropertyValue" nillable="true"
+                        type="tns:PropertyValue"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfPropertyValue" nillable="true" type="tns:ArrayOfPropertyValue"/>
+    <xs:complexType name="PropertyValue">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="IsDirty" nillable="true" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="PropertyValue" nillable="true" type="tns:PropertyValue"/>
+    <xs:simpleType name="StateType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="New"/>
+            <xs:enumeration value="Deleting"/>
+            <xs:enumeration value="Modifying"/>
+            <xs:enumeration value="ModifyingDeviceIdentificator"/>
+            <xs:enumeration value="Unknown"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="StateType" nillable="true" type="tns:StateType"/>
+</xs:schema>

@@ -1,0 +1,1051 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified"
+           targetNamespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.Log"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.Log"
+           xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+    <xs:import schemaLocation="xsd1.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+    <xs:complexType name="ArrayOfLogMsgSubType">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="LogMsgSubType" type="tns:LogMsgSubType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfLogMsgSubType" nillable="true" type="tns:ArrayOfLogMsgSubType"/>
+    <xs:simpleType name="LogMsgSubType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ControllerReload">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">197
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DeviceStateChanged"/>
+            <xs:enumeration value="DriverMethodCall"/>
+            <xs:enumeration value="ControllerTamperAlarm"/>
+            <xs:enumeration value="ControllerTamperNorm"/>
+            <xs:enumeration value="ControllerPowerNorm"/>
+            <xs:enumeration value="ControllerPowerBackup"/>
+            <xs:enumeration value="ControllerAccumulatorNorm"/>
+            <xs:enumeration value="ControllerAccumulatorDischarged"/>
+            <xs:enumeration value="ControllerPowerChannelShortCircuit"/>
+            <xs:enumeration value="ControllerPowerChannelEndShortCircuit"/>
+            <xs:enumeration value="ControllerHardwareFailure"/>
+            <xs:enumeration value="AccessPointAlarm"/>
+            <xs:enumeration value="AccessPointBroken"/>
+            <xs:enumeration value="AccessPointArmedGuard"/>
+            <xs:enumeration value="AccessPointDisarmedGuard"/>
+            <xs:enumeration value="AccessPointBlocked"/>
+            <xs:enumeration value="AccessPointUnblocked"/>
+            <xs:enumeration value="AccessPointArmGuardDeniedAccess"/>
+            <xs:enumeration value="AccessPointBlockDeniedAccess"/>
+            <xs:enumeration value="AccessPointArmGuardDeniedSensor"/>
+            <xs:enumeration value="AccessPointEmergencyOpened"/>
+            <xs:enumeration value="AccessPointEmergencyEnd"/>
+            <xs:enumeration value="AccessPointEmergencyEndDeniedButton"/>
+            <xs:enumeration value="AccessPointPassDenied"/>
+            <xs:enumeration value="AccessPointKeyQuery"/>
+            <xs:enumeration value="AccessPointEntry"/>
+            <xs:enumeration value="AccessPointExit"/>
+            <xs:enumeration value="AccessPointExitByCardReceiver"/>
+            <xs:enumeration value="AccessPointPassUnknown"/>
+            <xs:enumeration value="AccessPointFirstPersonEntry"/>
+            <xs:enumeration value="AccessPointFirstPersonExit"/>
+            <xs:enumeration value="AccessPointFirstPersonExitByCardReceiver"/>
+            <xs:enumeration value="AccessPointFirstPersonPassUnknown"/>
+            <xs:enumeration value="AccessPointSecondPersonEntry"/>
+            <xs:enumeration value="AccessPointSecondPersonExit"/>
+            <xs:enumeration value="AccessPointSecondPersonExitByCardReceiver"/>
+            <xs:enumeration value="AccessPointSecondPersonPassUnknown"/>
+            <xs:enumeration value="AccessPointPassRefused"/>
+            <xs:enumeration value="AccessPointEnteredPinUnderCompulsion"/>
+            <xs:enumeration value="AccessPointDoorLeftOpened"/>
+            <xs:enumeration value="AccessPointDoorLongOpened"/>
+            <xs:enumeration value="AccessPointDoorLongOpenedEnd"/>
+            <xs:enumeration value="AccessPointNotReceivedPermissionToPass"/>
+            <xs:enumeration value="AccessPointButtonPressed"/>
+            <xs:enumeration value="AccessPointOnGuardDelayStarted"/>
+            <xs:enumeration value="AccessPointSirenOn"/>
+            <xs:enumeration value="AccessPointSirenOff"/>
+            <xs:enumeration value="AccessPointCardReaderTamperAlert"/>
+            <xs:enumeration value="AccessPointCardReaderTamperNorm"/>
+            <xs:enumeration value="DriverActivated"/>
+            <xs:enumeration value="DriverDeactivated"/>
+            <xs:enumeration value="DeviceOnline"/>
+            <xs:enumeration value="DeviceOffline"/>
+            <xs:enumeration value="AccessPointCardReaderContainerFull"/>
+            <xs:enumeration value="AccessPointEndBroken"/>
+            <xs:enumeration value="AccessPointAlarmDelayStarted"/>
+            <xs:enumeration value="AccessPointDoorClosed"/>
+            <xs:enumeration value="ConverterNotFound"/>
+            <xs:enumeration value="ConverterNoDevicesOnCanBus"/>
+            <xs:enumeration value="ConverterOk"/>
+            <xs:enumeration value="AccessPointArmedGuardByKey"/>
+            <xs:enumeration value="AccessPointDisarmedGuardByKey"/>
+            <xs:enumeration value="AccessPointBlockedByKey"/>
+            <xs:enumeration value="AccessPointUnblockedByKey"/>
+            <xs:enumeration value="AccessPointArmGuardDeniedSensorByKey"/>
+            <xs:enumeration value="AccessPointEntryByKey"/>
+            <xs:enumeration value="AccessPointExitByKey"/>
+            <xs:enumeration value="AccessPointPassUnknownByKey"/>
+            <xs:enumeration value="AccessPointPassRefusedByKey"/>
+            <xs:enumeration value="AccessPointDoorLongOpenedByKey"/>
+            <xs:enumeration value="AccessPointDoorLongOpenedEndByKey"/>
+            <xs:enumeration value="AccessPointOnGuardDelayStartedByKey"/>
+            <xs:enumeration value="AccessPointDoorLeftOpenedByKey"/>
+            <xs:enumeration value="AccessPointDoorClosedByKey"/>
+            <xs:enumeration value="AccessPointKeyAppliedEntry"/>
+            <xs:enumeration value="AccessPointKeyAppliedExit"/>
+            <xs:enumeration value="GateCarPassDenied"/>
+            <xs:enumeration value="GateCarKeyAppliedEntry"/>
+            <xs:enumeration value="GateCarKeyAppliedExit"/>
+            <xs:enumeration value="GateCarKeyQuery"/>
+            <xs:enumeration value="GateCarEntry"/>
+            <xs:enumeration value="GateCarExit"/>
+            <xs:enumeration value="GateCarExitByCardReceiver"/>
+            <xs:enumeration value="GateCarPassUnknown"/>
+            <xs:enumeration value="GateCarEntryByKey"/>
+            <xs:enumeration value="GateCarExitByKey"/>
+            <xs:enumeration value="GateCarPassUnknownByKey"/>
+            <xs:enumeration value="GateCarFirstPersonEntry"/>
+            <xs:enumeration value="GateCarFirstPersonExit"/>
+            <xs:enumeration value="GateCarFirstPersonExitByCardReceiver"/>
+            <xs:enumeration value="GateCarFirstPersonPassUnknown"/>
+            <xs:enumeration value="GateCarSecondPersonEntry"/>
+            <xs:enumeration value="GateCarSecondPersonExit"/>
+            <xs:enumeration value="GateCarSecondPersonExitByCardReceiver"/>
+            <xs:enumeration value="GateCarSecondPersonPassUnknown"/>
+            <xs:enumeration value="GateCarPassRefused"/>
+            <xs:enumeration value="GateCarPassRefusedByKey"/>
+            <xs:enumeration value="GateCarArrived"/>
+            <xs:enumeration value="Fire"/>
+            <xs:enumeration value="AttentionFireWarning"/>
+            <xs:enumeration value="FireEquipmentFault"/>
+            <xs:enumeration value="PenetrationAlarm"/>
+            <xs:enumeration value="TrainBreak"/>
+            <xs:enumeration value="ElecticNetworkCrash"/>
+            <xs:enumeration value="ElectricNetworkRestored"/>
+            <xs:enumeration value="TemperatureIncrease"/>
+            <xs:enumeration value="NormalTemperature"/>
+            <xs:enumeration value="InputAlarm"/>
+            <xs:enumeration value="OutputShortCurcuit"/>
+            <xs:enumeration value="OutputBreak"/>
+            <xs:enumeration value="OutputOff"/>
+            <xs:enumeration value="OutputOn"/>
+            <xs:enumeration value="OutputRestoration"/>
+            <xs:enumeration value="OutputStateChanged"/>
+            <xs:enumeration value="DeviceCaseOpened"/>
+            <xs:enumeration value="DeviceCaseClosed"/>
+            <xs:enumeration value="VoiceNotificationOn"/>
+            <xs:enumeration value="VoiceNotificationOff"/>
+            <xs:enumeration value="ValveReady"/>
+            <xs:enumeration value="ValveFault"/>
+            <xs:enumeration value="ValveError"/>
+            <xs:enumeration value="ValveRestoration"/>
+            <xs:enumeration value="TrainParametersError"/>
+            <xs:enumeration value="TrainOff"/>
+            <xs:enumeration value="TrainOn"/>
+            <xs:enumeration value="DPLS1NotConnected"/>
+            <xs:enumeration value="DPLS2NotConnected"/>
+            <xs:enumeration value="DPLS1ConnectionRestored"/>
+            <xs:enumeration value="DPLS2ConnectionRestored"/>
+            <xs:enumeration value="DPLSShortCircuit"/>
+            <xs:enumeration value="DPLSCrash"/>
+            <xs:enumeration value="TrainShortCircuit"/>
+            <xs:enumeration value="SensorTriggered"/>
+            <xs:enumeration value="SDUTriggered"/>
+            <xs:enumeration value="SDUFault"/>
+            <xs:enumeration value="ConnectionLost"/>
+            <xs:enumeration value="ConnectionRestored"/>
+            <xs:enumeration value="PumpOn"/>
+            <xs:enumeration value="PumpOff"/>
+            <xs:enumeration value="StartCircuitOperation"/>
+            <xs:enumeration value="FaultFireFighting"/>
+            <xs:enumeration value="AutomaticStartDelay"/>
+            <xs:enumeration value="Extinguishing"/>
+            <xs:enumeration value="EmergencyASPTStart"/>
+            <xs:enumeration value="StartAUP"/>
+            <xs:enumeration value="BlockStartAUP"/>
+            <xs:enumeration value="AutomaticOn"/>
+            <xs:enumeration value="AutomaticOff"/>
+            <xs:enumeration value="StopAUP"/>
+            <xs:enumeration value="AutomaticTestError"/>
+            <xs:enumeration value="ManualTest"/>
+            <xs:enumeration value="PowerCrash"/>
+            <xs:enumeration value="AKBTestError"/>
+            <xs:enumeration value="AKBDischarged"/>
+            <xs:enumeration value="BatteryFault"/>
+            <xs:enumeration value="RIPChargerFault"/>
+            <xs:enumeration value="RIPOverload"/>
+            <xs:enumeration value="RIPNotOverload"/>
+            <xs:enumeration value="RIPChargerRestoration"/>
+            <xs:enumeration value="PowerRestoration"/>
+            <xs:enumeration value="BatteryRestoration"/>
+            <xs:enumeration value="RIPOff"/>
+            <xs:enumeration value="RIPOn"/>
+            <xs:enumeration value="DeviceRestart"/>
+            <xs:enumeration value="NeedMaintenance"/>
+            <xs:enumeration value="RS485Off"/>
+            <xs:enumeration value="RS485Restored"/>
+            <xs:enumeration value="TrainDisturbance"/>
+            <xs:enumeration value="TrainRestoration"/>
+            <xs:enumeration value="StopTrainAlarm"/>
+            <xs:enumeration value="TrainDisarmed"/>
+            <xs:enumeration value="ThermometerRestoration"/>
+            <xs:enumeration value="AlarmWaterLevelIncrease"/>
+            <xs:enumeration value="AlarmWaterLevelDecrease"/>
+            <xs:enumeration value="WaterLevelIncrease"/>
+            <xs:enumeration value="NormalWaterLevel"/>
+            <xs:enumeration value="WaterLevelDecrease"/>
+            <xs:enumeration value="SilentAlarm"/>
+            <xs:enumeration value="DPLSRestoration"/>
+            <xs:enumeration value="FireEquipmentNormRestoration"/>
+            <xs:enumeration value="LowTemperature"/>
+            <xs:enumeration value="UnknownDevice"/>
+            <xs:enumeration value="ControlRestoration"/>
+            <xs:enumeration value="TrainOnDelay"/>
+            <xs:enumeration value="TrainArmed"/>
+            <xs:enumeration value="Identification"/>
+            <xs:enumeration value="TechTrainRestoration"/>
+            <xs:enumeration value="TechTrainDisturbance"/>
+            <xs:enumeration value="ThermometerFault"/>
+            <xs:enumeration value="TechTrainDisturbance2"/>
+            <xs:enumeration value="FailedTrainOn"/>
+            <xs:enumeration value="InnerZoneRestored"/>
+            <xs:enumeration value="DepartmentArmed"/>
+            <xs:enumeration value="DepartmentDisarmed"/>
+            <xs:enumeration value="OrionRelayOn"/>
+            <xs:enumeration value="OrionRelayOff"/>
+            <xs:enumeration value="AccessPointEmegancyExitButton">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">199
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointEmegancyExitButtonEnd">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">200
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DoorOpenDenied">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">201
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DoorOpen">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">202
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="InvalidDoorNumber">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">203
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CommunicationModuleRestored">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">204
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NewModule">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">205
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NoCommunicationModule">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">206
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ImpossibleKeyOperation">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">207
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ImpossibleOpenDoor">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">208
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BreathalyzerCheckSuccessful">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">209
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="VerificationTimeExpired">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">210
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TimeIntervalProhibition">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">211
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DataAuthenticationError">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">212
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CardAuthorizationError">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">213
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="EnabledOperatorControl">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">214
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DisabledOperatorControl">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">215
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ReaderTamperAlert">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">216
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ReaderTamperNorm">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">217
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ReaderConnectionLost">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">218
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ReaderConnectionRestored">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">219
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RusgardFacePhotoProcessing">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">220
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BiometricDeviceConnectionLost">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">221
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BiometricDeviceConnectionRestored">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">222
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BiometricAutentificationError">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">223
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ControllerKeyProcessingError">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">224
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BiometricVerificationError">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">225
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointFaceEntry">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">226
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GateFaceEntry">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">227
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointFaceExit">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">228
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GateFaceExit">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">229
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointFaceExitByCardReceiver">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">230
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GateFaceExitByCardReceiver">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">231
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointFaceEntryRefused">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">232
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GateFaceEntryRefused">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">233
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointFaceExitRefused">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">234
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GateFaceExitRefused">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">235
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointFaceExitRefusedByCardReceiver">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">236
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GateFaceExitRefusedByCardReceiver">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">237
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointEntryDeniedNoConfirmFace">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">238
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GateFaceEntryDeniedNoConfirmFace">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">239
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointFaceExitDeniedNoConfirmFace">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">240
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GateFaceExitDeniedNoConfirmFace">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">241
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_DoorOpenByKeyOrOperator">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">242
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_OpenByEmployee">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">243
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_DoorLeftOpen">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">244
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_DoorClosedNoInfoWhoOpen">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">245
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_DoorClosed">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">246
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_DoorAccessDenyUnknownKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">247
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_DoorAccessDenyNoPermission">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">248
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_DoorOpenedKeyAccessDenyUnknownKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">249
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_DoorOpenedKeyAccessDenyNoPermission">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">250
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_EmployeeGaveKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">251
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_EmployeeGaveUnknownKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">252
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_EmployeeGaveUnknownThing">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">253
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_UnknownEmployeeGaveKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">254
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_UnknownEmployeeGaveUnknownKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">255
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_UnknownEmployeeGaveUnknownThing">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">256
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_EmployeeTakeKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">257
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_EmployeeTakeUnknownKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">258
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_EmployeeTakeUnknownThing">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">259
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_UnknownEmployeeTakeKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">260
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_UnknownEmployeeTakeUnknownKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">261
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_UnknownEmployeeTakeUnknownThing">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">262
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_SlotConnected">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">263
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KeyKeeper_SlotDisconnected">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">264
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PostOffice_CellOpened">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">265
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PostOffice_CellOpenedByEmployeeOperator">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">266
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PostOffice_CellClosed">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">267
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PostOffice_AccessDenied">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">268
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PostOffice_AccessDeniedUnknownKey">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">269
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PostOffice_RelayBlockMalfunction">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">270
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RgLockDisconnected">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">271
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RgLockConnected">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">272
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IonistorStateFailure">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">273
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IonistorStateOk">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">274
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointFreePassageModeEnabled">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">275
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AccessPointFreePassageModeDisabled">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">276
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IntegrationServiceMessage">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">277
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LogMsgSubType" nillable="true" type="tns:LogMsgSubType"/>
+    <xs:complexType name="ArrayOfLogMessageTypeSlimInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="LogMessageTypeSlimInfo" nillable="true"
+                        type="tns:LogMessageTypeSlimInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfLogMessageTypeSlimInfo" nillable="true" type="tns:ArrayOfLogMessageTypeSlimInfo"/>
+    <xs:complexType name="LogMessageTypeSlimInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="LogMesssageType" type="tns:LogMsgType"/>
+            <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="OrderNumber" type="xs:int"/>
+            <xs:element minOccurs="0" name="Publish" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="LogMessageTypeSlimInfo" nillable="true" type="tns:LogMessageTypeSlimInfo"/>
+    <xs:simpleType name="LogMsgType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Information">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Warning">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Error">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Alarm">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4
+                        </EnumerationValue>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LogMsgType" nillable="true" type="tns:LogMsgType"/>
+    <xs:complexType name="ArrayOfLogMessageSubtypeSlimInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="LogMessageSubtypeSlimInfo" nillable="true"
+                        type="tns:LogMessageSubtypeSlimInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfLogMessageSubtypeSlimInfo" nillable="true" type="tns:ArrayOfLogMessageSubtypeSlimInfo"/>
+    <xs:complexType name="LogMessageSubtypeSlimInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="LogMessageSubtype" type="tns:LogMsgSubType"/>
+            <xs:element minOccurs="0" name="LogMesssageType" type="tns:LogMsgType"/>
+            <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="OrderNumber" type="xs:int"/>
+            <xs:element minOccurs="0" name="Publish" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="LogMessageSubtypeSlimInfo" nillable="true" type="tns:LogMessageSubtypeSlimInfo"/>
+    <xs:complexType name="ArrayOfLogMsgType">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="LogMsgType" type="tns:LogMsgType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfLogMsgType" nillable="true" type="tns:ArrayOfLogMsgType"/>
+    <xs:simpleType name="LogSubjectType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Operator"/>
+            <xs:enumeration value="OperatorGroup"/>
+            <xs:enumeration value="Employee"/>
+            <xs:enumeration value="EmployeeGroup"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LogSubjectType" nillable="true" type="tns:LogSubjectType"/>
+    <xs:simpleType name="LogMessageSortedColumn">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Id"/>
+            <xs:enumeration value="DateTime"/>
+            <xs:enumeration value="LogMessageType"/>
+            <xs:enumeration value="LogMessageSubType"/>
+            <xs:enumeration value="Message"/>
+            <xs:enumeration value="Details"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LogMessageSortedColumn" nillable="true" type="tns:LogMessageSortedColumn"/>
+    <xs:complexType name="LogData">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Count" type="xs:long"/>
+            <xs:element minOccurs="0" name="Messages" nillable="true" type="tns:ArrayOfLogMessage"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="LogData" nillable="true" type="tns:LogData"/>
+    <xs:complexType name="ArrayOfLogMessage">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="LogMessage" nillable="true" type="tns:LogMessage"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfLogMessage" nillable="true" type="tns:ArrayOfLogMessage"/>
+    <xs:complexType name="LogMessage">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="AlcoholCheckState" type="tns:AlcoCheckState"/>
+            <xs:element minOccurs="0" name="AlcoholResult" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="ContentData" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ContentType" nillable="true" type="tns:LogMessageContentDataType"/>
+            <xs:element minOccurs="0" name="DateTime" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="Details" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="DriverID" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="DriverName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="EmployeeFirstName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="EmployeeGroupFullName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="EmployeeGroupId" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="EmployeeGroupName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="EmployeeID" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="EmployeeLastName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="EmployeeSecondName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="EmployeeTableNumber" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="FaceRecognitionCheckState" type="tns:FaceCheckState"/>
+            <xs:element minOccurs="0" name="Id" type="xs:long"/>
+            <xs:element minOccurs="0" name="LivenessResult" nillable="true" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="LogMessageSubType" type="tns:LogMsgSubType"/>
+            <xs:element minOccurs="0" name="LogMessageType" type="tns:LogMsgType"/>
+            <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="OperatorFullName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="OperatorID" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="OperatorLogin" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ServerId" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="ServerName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="TemperatureResult" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="VehicleBrand" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="VehicleID" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="VehicleRegistrationNumber" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="LogMessage" nillable="true" type="tns:LogMessage"/>
+    <xs:simpleType name="AlcoCheckState">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotRequired"/>
+            <xs:enumeration value="CheckPerformed"/>
+            <xs:enumeration value="CheckRefused"/>
+            <xs:enumeration value="CommunicationFailure"/>
+            <xs:enumeration value="DailyAlcotestingNotConfirmed"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AlcoCheckState" nillable="true" type="tns:AlcoCheckState"/>
+    <xs:simpleType name="LogMessageContentDataType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="IVideonLocalArchiveRecord"/>
+            <xs:enumeration value="IVideonAccountArchiveRecord"/>
+            <xs:enumeration value="PanasonicArchveRecord"/>
+            <xs:enumeration value="ISSArchiveRecord"/>
+            <xs:enumeration value="NUUOArchiveRecord"/>
+            <xs:enumeration value="TrassirArchiveRecord"/>
+            <xs:enumeration value="IdisArchiveRecord"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LogMessageContentDataType" nillable="true" type="tns:LogMessageContentDataType"/>
+    <xs:simpleType name="FaceCheckState">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotRequired"/>
+            <xs:enumeration value="FaceRecognized"/>
+            <xs:enumeration value="FaceNotRecognized"/>
+            <xs:enumeration value="FaceSoftMode"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="FaceCheckState" nillable="true" type="tns:FaceCheckState"/>
+    <xs:simpleType name="ScalesMeasurementReuslt">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotPerformed"/>
+            <xs:enumeration value="Success"/>
+            <xs:enumeration value="Refusal"/>
+            <xs:enumeration value="Failure"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="ScalesMeasurementReuslt" nillable="true" type="tns:ScalesMeasurementReuslt"/>
+    <xs:simpleType name="TemperatureCheckState">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NotRequired"/>
+            <xs:enumeration value="TemperatureSuccess"/>
+            <xs:enumeration value="TemperatureAbnormal"/>
+            <xs:enumeration value="MaskNotDetected"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="TemperatureCheckState" nillable="true" type="tns:TemperatureCheckState"/>
+</xs:schema>
