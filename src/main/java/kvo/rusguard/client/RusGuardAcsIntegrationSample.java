@@ -66,6 +66,9 @@ import java.security.cert.X509Certificate;
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.transport.http.HTTPConduit;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class RusGuardAcsIntegrationSample {
 
     private static SSLContext createTrustAllSslContext() {
@@ -123,19 +126,13 @@ public class RusGuardAcsIntegrationSample {
 
         conduit.setTlsClientParameters(tlsParams);
     }
-
+//    private static final String SERVICE_URL = "https://10.0.0.25/LNetworkServer/LNetworkService.svc";
     private static final String SERVICE_URL = "https://scud-1.gaz.ru/LNetworkServer/LNetworkService.svc";
-//
     private static final String USERNAME = "KvochkinAY";
-
     private static final String PASSWORD = "%*5I1OO4rpE%";
-
 // Статические прокси-объекты
-
     private static ILNetworkService networkService;
-
     private static ILNetworkConfigurationService networkCnfgService;
-
     static {
         try {
 //            disableSslVerification(); // Только для теста!
@@ -254,6 +251,9 @@ public class RusGuardAcsIntegrationSample {
         try {
             // Disable SSL verification (for development only)
             disableSSLVerification();
+
+            Logger.getLogger("org.tempuri").setLevel(Level.OFF);
+            Logger.getLogger("org.tempuri.LNetworkService").setLevel(Level.OFF);
 
             System.out.println("Инициализация сервисов...");
             System.out.println("Подключаемся к WSDL: " + SERVICE_URL + "?wsdl");
@@ -971,10 +971,19 @@ public class RusGuardAcsIntegrationSample {
 
 // ================================
 // #region Пример использования
+//    ID: 6d353b9b-352e-442f-ae24-70791992c1a3, GroupID: , LastName: Квочкин, FirstName: Алексей, SecondName: Юрьевич
+//    ID: eb1eb9e9-da50-412b-867b-9008bb3af985, GroupID: , LastName: Мергазымова, FirstName: Ольга, SecondName: Владимировна
+//    ID: c675452f-6881-426d-99a7-d7af2fc6b943, GroupID: , LastName: Торопов, FirstName: Михаил, SecondName: Викторович
+//    ID: e4f9bf7f-3bc0-4278-9e18-19693d1d92fb, GroupID: , LastName: Жирнов, FirstName: Сергей, SecondName: Алексеевич
+//    ID: cc4990aa-b309-479e-a484-65e4abe80dfe, GroupID: , LastName: Кокурин, FirstName: Максим, SecondName: Романович
+//    ID: 4bf9f60a-da45-4646-b6cd-f8b0bdbaad75, GroupID: , LastName: Ермолаев, FirstName: Алексей, SecondName: Сергеевич
 // ================================
 
     public static void main(String[] args) {
         try {
+            Logger.getLogger("org.tempuri").setLevel(Level.OFF);
+            Logger.getLogger("org.tempuri.LNetworkService").setLevel(Level.OFF);
+
             // Добавляем системные свойства для отключения проверки политики
             System.setProperty("org.apache.cxf.stax.allowInsecureParser", "true");
             System.setProperty("ws-security.disable.wsm4j", "true");
@@ -986,45 +995,163 @@ public class RusGuardAcsIntegrationSample {
             // Инициализация сервисов
             initServices();
 
-            // Создаем условие поиска
-            SearchCondition searchCondition = new SearchCondition();
-
-            // Устанавливаем фамилию для поиска
-            JAXBElement<String> lastNameElement = new JAXBElement<>(
-                    new QName("http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS", "LastName"),
-                    String.class,
-                    "Квочкин"
-            );
-            searchCondition.setLastName(lastNameElement);
-
-            // Создаем элемент условия поиска
-            QName searchConditionQName = new QName("http://tempuri.org/", "SearchCondition");
-            JAXBElement<SearchCondition> searchConditionElement = new JAXBElement<>(
-                    searchConditionQName,
-                    SearchCondition.class,
-                    searchCondition
-            );
-
-            // Создаем запрос на поиск
-            FindEmployees findEmployees = new FindEmployees();
-            findEmployees.setSearchCondition(searchConditionElement);
-            // Выполняем поиск
-            System.out.println("Выполнение поиска сотрудников...");
-            ArrayOfAcsEmployee result = networkService.findEmployees(searchCondition);
-
-            // Обрабатываем результаты
-            if (result != null && result.getAcsEmployee() != null) {
-                System.out.println("Найдено сотрудников: " + result.getAcsEmployee().size());
-                for (AcsEmployee employee : result.getAcsEmployee()) {
-                    System.out.println("ID: " + employee.getEmployeeID());
-                }
-            } else {
-                System.out.println("Сотрудники не найдены");
-            }
+//            getEmployee(); //ID: 620da80a-c0fd-4a4a-ab5a-3518a4615c1d, GroupID: , LastName: КОМАРОВ, FirstName: ОЛЕГ, SecondName: ДМИТРИЕВИЧ
+            getAllEmployees();
 
         } catch (Exception e) {
             System.err.println("Ошибка при выполнении поиска: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    private static void getEmployee() {
+        // Создаем условие поиска
+        SearchCondition searchCondition = new SearchCondition();
+
+        // Устанавливаем фамилию для поиска
+        JAXBElement<String> lastNameElement = new JAXBElement<>(
+                new QName("http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS", "LastName"),
+                String.class,
+                "Квочкин"
+        );
+        searchCondition.setLastName(lastNameElement);
+
+        // Создаем элемент условия поиска
+        QName searchConditionQName = new QName("http://tempuri.org/", "SearchCondition");
+        JAXBElement<SearchCondition> searchConditionElement = new JAXBElement<>(
+                searchConditionQName,
+                SearchCondition.class,
+                searchCondition
+        );
+
+        // Создаем запрос на поиск
+        FindEmployees findEmployees = new FindEmployees();
+        findEmployees.setSearchCondition(searchConditionElement);
+        // Выполняем поиск
+        System.out.println("Выполнение поиска сотрудников...");
+        ArrayOfAcsEmployee result = networkService.findEmployees(searchCondition);
+
+        // Обрабатываем результаты
+        if (result != null && result.getAcsEmployee() != null) {
+            System.out.println("Найдено сотрудников: " + result.getAcsEmployee().size());
+            for (AcsEmployee employee : result.getAcsEmployee()) {
+                System.out.println("ID: " + employee.getEmployeeID());
+            }
+        } else {
+            System.out.println("Сотрудники не найдены");
+        }
+    }
+
+    private static void getAllEmployees() {
+        SearchCondition searchCondition = new SearchCondition();
+        searchCondition.setIsGlobalSearch(true);
+        searchCondition.setIncludeRemoved(true);
+
+        System.out.println("Выполнение поиска всех сотрудников...");
+        ArrayOfAcsEmployee result = networkService.findEmployees(searchCondition);
+
+        if (result != null && result.getAcsEmployee() != null && !result.getAcsEmployee().isEmpty()) {
+            System.out.println("Найдено сотрудников: " + result.getAcsEmployee().size());
+            for (AcsEmployee employee : result.getAcsEmployee()) {
+                System.out.println(
+                        "ID: " + getValue(employee, "getEmployeeID") +
+                                ", GroupID: " + getValue(employee, "getGroupID") +
+                                ", LastName: " + getValue(employee, "getLastName") +
+                                ", FirstName: " + getValue(employee, "getFirstName") +
+                                ", SecondName: " + getValue(employee, "getSecondName")
+                );
+            }
+            return;
+        }
+
+        System.out.println("findEmployees вернул 0, получаем сотрудников через группы...");
+
+        ArrayOfAcsEmployeeGroup groupsWrapper = networkService.getAcsEmployeeGroups();
+        if (groupsWrapper == null || groupsWrapper.getAcsEmployeeGroup() == null) {
+            System.out.println("Не удалось получить группы сотрудников");
+            return;
+        }
+
+        java.util.Set<String> seenEmployeeIds = new java.util.HashSet<>();
+        java.util.Set<String> visitedGroupIds = new java.util.HashSet<>();
+        int total = collectEmployeesFromGroupsRecursive(groupsWrapper.getAcsEmployeeGroup(), visitedGroupIds, seenEmployeeIds);
+        System.out.println("Итого сотрудников (через группы): " + total);
+    }
+
+    private static int collectEmployeesFromGroupsRecursive(
+            java.util.List<AcsEmployeeGroup> groups,
+            java.util.Set<String> visitedGroupIds,
+            java.util.Set<String> seenEmployeeIds
+    ) {
+        if (groups == null || groups.isEmpty()) {
+            return 0;
+        }
+
+        int total = 0;
+
+        for (AcsEmployeeGroup group : groups) {
+            if (group == null) {
+                continue;
+            }
+
+            String groupId = group.getID();
+            if (groupId == null || groupId.isEmpty() || !visitedGroupIds.add(groupId)) {
+                continue;
+            }
+
+            ArrayOfAcsEmployeeSlim employeesWrapper;
+            try {
+                employeesWrapper = networkService.getAcsEmployeesByGroup(groupId, true);
+            } catch (ILNetworkServiceGetAcsEmployeesByGroupDataNotFoundExceptionFaultFaultMessage e) {
+                employeesWrapper = null;
+            }
+
+            if (employeesWrapper != null && employeesWrapper.getAcsEmployeeSlim() != null) {
+                for (AcsEmployeeSlim emp : employeesWrapper.getAcsEmployeeSlim()) {
+                    if (emp == null) {
+                        continue;
+                    }
+                    String id = String.valueOf(getValue(emp, "getID"));
+                    if (id.isEmpty() || !seenEmployeeIds.add(id)) {
+                        continue;
+                    }
+                    total++;
+                    System.out.println(
+                            "ID: " + id +
+                                    ", GroupID: " + getValue(emp, "getGroupID") +
+                                    ", LastName: " + getValue(emp, "getLastName") +
+                                    ", FirstName: " + getValue(emp, "getFirstName") +
+                                    ", SecondName: " + getValue(emp, "getSecondName")
+                    );
+                }
+            }
+
+            // Рекурсивно обходим вложенные группы
+            if (group.getEmployeeGroups() != null && group.getEmployeeGroups().getValue() != null) {
+                total += collectEmployeesFromGroupsRecursive(
+                        group.getEmployeeGroups().getValue().getAcsEmployeeGroup(),
+                        visitedGroupIds,
+                        seenEmployeeIds
+                );
+            }
+        }
+
+        return total;
+    }
+
+    private static Object getValue(Object obj, String methodName) {
+        try {
+            java.lang.reflect.Method m = obj.getClass().getMethod(methodName);
+            Object v = m.invoke(obj);
+            if (v == null) {
+                return "";
+            }
+            if (v instanceof JAXBElement) {
+                return ((JAXBElement<?>) v).getValue();
+            }
+            return v;
+        } catch (Exception e) {
+            return "";
         }
     }
 }
