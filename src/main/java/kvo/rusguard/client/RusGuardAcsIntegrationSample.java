@@ -930,15 +930,14 @@ public class RusGuardAcsIntegrationSample {
             System.out.println("Classpath: " + System.getProperty("java.class.path"));
             // Инициализация сервисов
             initServices();
-//            setEmployeeLocked("a0a86a24-8522-4ce2-b3ae-e269b3973fa8", false); //Блокировать / разблокировать пользователя - Нет прав!!!
+//            setEmployeeLocked("a0a86a24-8522-4ce2-b3ae-e269b3973fa8", false); //1. Блокировать / разблокировать пользователя - Нет прав!!!
             //По IDGroup найти всех Employees
-            System.out.println("Поиск сотрудников по ID Group");
-            getEmployeesByGroupID("901cb40e-fce2-47bb-9b0e-d3ca2087a22d");
+            getEmployeesByGroupID("901cb40e-fce2-47bb-9b0e-d3ca2087a22d"); //2. Поиск сотрудников по ID Group
             //**************************
-            getEmployee("Квочкин", "Алексей", "Юрьевич");
-            getEmployeeById("8bcce3b1-2448-42f0-b61e-51bba707016f");
-            getEmployeePassagesByDate("8bcce3b1-2448-42f0-b61e-51bba707016f", LocalDate.of(2026, 1, 14));
-            //            getAllEmployees();
+            getEmployee("Квочкин", "Алексей", "Юрьевич"); //3. Поиск по Фио
+            getEmployeeById("8bcce3b1-2448-42f0-b61e-51bba707016f"); //4. Поиск по ID сотрудника
+            getEmployeePassagesByDate("8bcce3b1-2448-42f0-b61e-51bba707016f", LocalDate.of(2026, 1, 14)); //5. Поиск прохода
+            //            getAllEmployees(); //6. Поиск всех сотрудников
         } catch (Exception e) {
             System.err.println("Ошибка при выполнении поиска: " + e.getMessage());
             e.printStackTrace();
