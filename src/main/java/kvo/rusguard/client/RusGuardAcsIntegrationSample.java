@@ -6,6 +6,7 @@ import com.rusguard.client.ILNetworkConfigurationService;
 import com.rusguard.client.ILNetworkConfigurationServiceAddAcsEmployeeGroupArgumentExceptionFaultFaultMessage;
 import com.rusguard.client.ILNetworkConfigurationServiceAddAcsEmployeeGroupArgumentOutOfRangeExceptionFaultFaultMessage;
 import com.rusguard.client.ILNetworkConfigurationServiceAddAcsEmployeeGroupDataNotFoundExceptionFaultFaultMessage;
+
 import com.rusguard.client.ILNetworkService;
 import com.sun.xml.txw2.output.CharacterEscapeHandler;
 import jakarta.xml.bind.JAXBElement;
@@ -290,20 +291,20 @@ public class RusGuardAcsIntegrationSample {
             bpTimeout.getRequestContext().put("jakarta.xml.ws.client.connectionTimeout", "10000");
             bpTimeout.getRequestContext().put("jakarta.xml.ws.client.receiveTimeout", "30000");
 
-//            BindingProvider bpTimeoutCfg = (BindingProvider) networkCnfgService;
-//            bpTimeoutCfg.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, CONFIG_SERVICE_URL);
-//            bpTimeoutCfg.getRequestContext().put("force.urlconnection.http.conduit", Boolean.TRUE);
-//            bpTimeoutCfg.getRequestContext().put("javax.xml.ws.client.connectionTimeout", "10000");
-//            bpTimeoutCfg.getRequestContext().put("javax.xml.ws.client.receiveTimeout", "30000");
-//            bpTimeoutCfg.getRequestContext().put("jakarta.xml.ws.client.connectionTimeout", "10000");
-//            bpTimeoutCfg.getRequestContext().put("jakarta.xml.ws.client.receiveTimeout", "30000");
+            BindingProvider bpTimeoutCfg = (BindingProvider) networkCnfgService;
+            bpTimeoutCfg.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, CONFIG_SERVICE_URL);
+            bpTimeoutCfg.getRequestContext().put("force.urlconnection.http.conduit", Boolean.TRUE);
+            bpTimeoutCfg.getRequestContext().put("javax.xml.ws.client.connectionTimeout", "10000");
+            bpTimeoutCfg.getRequestContext().put("javax.xml.ws.client.receiveTimeout", "30000");
+            bpTimeoutCfg.getRequestContext().put("jakarta.xml.ws.client.connectionTimeout", "10000");
+            bpTimeoutCfg.getRequestContext().put("jakarta.xml.ws.client.receiveTimeout", "30000");
 
             configureCxfTls(networkService);
-//            configureCxfTls(networkCnfgService);
+            configureCxfTls(networkCnfgService);
 
             // Configure WS-Security
             configureWSSecurity((BindingProvider) networkService);
-//            configureWSSecurity((BindingProvider) networkCnfgService);
+            configureWSSecurity((BindingProvider) networkCnfgService);
 
             System.out.println("Сервис успешно инициализирован");
         } catch (Exception e) {
@@ -472,56 +473,6 @@ public class RusGuardAcsIntegrationSample {
             return new AcsEmployeeGroup[0];
         }
     }
-
-//    public static AcsEmployeeGroup getGuestEmployeeGroup() {
-//        try {
-//            AcsEmployeeGroup[] groups = networkService.getAcsEmployeeGroups().getAcsEmployeeGroup().toArray(new AcsEmployeeGroup[0]);
-//
-//            return Arrays.stream(groups)
-//                    .filter(g -> !g.isIsRemoved() && "Посетители".equals(g.getName()))
-//                    .findFirst()
-//                    .orElseGet(() -> {
-//                        // Создаём группу "Посетители", если не нашли существующую
-//                        try {
-//                            return networkCnfgService.addAcsEmployeeGroup(null, "Посетители", "", null, true, "");
-//                        } catch (ILNetworkConfigurationServiceAddAcsEmployeeGroupArgumentExceptionFaultFaultMessage e) {
-//                            throw new RuntimeException(e);
-//                        } catch (
-//                                ILNetworkConfigurationServiceAddAcsEmployeeGroupDataNotFoundExceptionFaultFaultMessage e) {
-//                            throw new RuntimeException(e);
-//                        } catch (
-//                                ILNetworkConfigurationServiceAddAcsEmployeeGroupArgumentOutOfRangeExceptionFaultFaultMessage e) {
-//                            throw new RuntimeException(e);
-//                        }
-//                    });
-//
-//        } catch (Exception e) {
-//            System.err.println("Ошибка получения/создания группы посетителей: " + e.getMessage());
-//            return null;
-//        }
-//    }
-
-//    public static AcsEmployeeSlim[] getAcsEmployeesInGroup(String groupId) {
-//        try {
-//            // Get employees by group ID
-//            ArrayOfAcsEmployeeSlim result = networkService.getAcsEmployeesByGroup(String.valueOf(UUID.fromString(groupId)), false);
-//            AcsEmployeeSlim[] employees = result.getAcsEmployeeSlim().toArray(new AcsEmployeeSlim[0]);
-//            // Filter out removed employees
-//            List<AcsEmployeeSlim> active = new ArrayList<>();
-//            for (AcsEmployeeSlim emp : employees) {
-//                if (!emp.isIsRemoved()) {
-//                    active.add(emp);
-//                }
-//            }
-//
-//            // Convert list back to array
-//            return active.toArray(new AcsEmployeeSlim[0]);
-//
-//        } catch (Exception e) {
-//            System.err.println("Error getting employees in group: " + e.getMessage());
-//            return new AcsEmployeeSlim[0]; // Return empty array in case of error
-//        }
-//    }
 
 
     public static AcsEmployeeFull getAcsEmployee(String id) {
@@ -904,7 +855,7 @@ public class RusGuardAcsIntegrationSample {
         return employee.getPosition().getValue().getName().getValue();
     }
 
-// ================================
+    // ================================
 // #region Пример использования
 //    ID: 6d353b9b-352e-442f-ae24-70791992c1a3, LastName: Квочкин, FirstName: Алексей, SecondName: Юрьевич, Position:
 //    ID: 55a16c7b-5b93-40f4-af8a-64dd9c5eeb79, LastName: Квочкин, FirstName: Алексей, SecondName: Юрьевич, Position:
@@ -915,6 +866,53 @@ public class RusGuardAcsIntegrationSample {
 //    ID: cc4990aa-b309-479e-a484-65e4abe80dfe, GroupID: 901cb40e-fce2-47bb-9b0e-d3ca2087a22d, LastName: Кокурин, FirstName: Максим, SecondName: Романович
 //    ID: 4bf9f60a-da45-4646-b6cd-f8b0bdbaad75, GroupID: 901cb40e-fce2-47bb-9b0e-d3ca2087a22d, LastName: Ермолаев, FirstName: Алексей, SecondName: Сергеевич
 // ================================
+    public static void printEmployeeGroups(List<AcsEmployeeGroup> groups, int depth) {
+        if (groups == null || groups.isEmpty()) return;
+        for (AcsEmployeeGroup group : groups) {
+            // Выводим текущую группу с отступом
+            String indent = "  ".repeat(depth); // 2 пробела на уровень
+            String groupName = group.getName() != null ? group.getName().getValue() : "[No Name]";
+            String groupId = group.getID() != null ? group.getID() : "[No ID]";
+            System.out.println(indent + "└─ " + groupName + " (" + groupId + ")");
+
+            // Получаем подгруппы как JAXBElement<ArrayOfAcsEmployeeGroup>
+            JAXBElement<ArrayOfAcsEmployeeGroup> subGroupsElement = group.getEmployeeGroups();
+
+            if (subGroupsElement != null) {
+                ArrayOfAcsEmployeeGroup subGroups = subGroupsElement.getValue();
+                if (subGroups != null && subGroups.getAcsEmployeeGroup() != null) {
+                    // Передаём List<AcsEmployeeGroup> из ArrayOfAcsEmployeeGroup
+                    printEmployeeGroups(subGroups.getAcsEmployeeGroup(), depth + 1);
+                }
+            }
+        }
+    }
+
+    /**
+     * Выводит дерево групп, начиная с одного корневого AcsEmployeeGroup
+     */
+    public static void printEmployeeGroup(AcsEmployeeGroup rootGroup, int depth) {
+        if (rootGroup == null) return;
+
+        // Выводим текущую группу
+        String indent = "  ".repeat(depth);
+        String groupName = rootGroup.getName() != null ? rootGroup.getName().getValue() : "[No Name]";
+        String groupId = rootGroup.getID() != null ? rootGroup.getID() : "[No ID]";
+        System.out.println(indent + "└─ " + groupName + " (" + groupId + ")");
+
+        // Получаем подгруппы (JAXBElement<ArrayOfAcsEmployeeGroup>)
+        JAXBElement<ArrayOfAcsEmployeeGroup> subGroupsElement = rootGroup.getEmployeeGroups();
+
+        if (subGroupsElement != null) {
+            ArrayOfAcsEmployeeGroup subGroups = subGroupsElement.getValue();
+            if (subGroups != null && subGroups.getAcsEmployeeGroup() != null) {
+                // Рекурсивно обрабатываем список подгрупп
+                for (AcsEmployeeGroup childGroup : subGroups.getAcsEmployeeGroup()) {
+                    printEmployeeGroup(childGroup, depth + 1);
+                }
+            }
+        }
+    }
 
     public static void main(String[] args) {
         try {
@@ -930,18 +928,68 @@ public class RusGuardAcsIntegrationSample {
             System.out.println("Classpath: " + System.getProperty("java.class.path"));
             // Инициализация сервисов
             initServices();
-//            setEmployeeLocked("a0a86a24-8522-4ce2-b3ae-e269b3973fa8", false); //1. Блокировать / разблокировать пользователя - Нет прав!!!
+            //TODO            setEmployeeLocked("4dd89565-74f0-493f-9812-519242d8124d", false); //1. Блокировать / разблокировать пользователя - Нет прав!!! (4dd89565-74f0-493f-9812-519242d8124d - Карлышев А)
             //По IDGroup найти всех Employees
-            getEmployeesByGroupID("901cb40e-fce2-47bb-9b0e-d3ca2087a22d"); //2. Поиск сотрудников по ID Group
+//            System.out.println("Поиск сотрудников по ID Group");
+            //TODO            getEmployeesByGroupID("901cb40e-fce2-47bb-9b0e-d3ca2087a22d"); //2. Поиск сотрудников по ID Group
+            //TODO            String nameGroup = getGroupName("75c0f525-0851-4730-9edc-f16e955a32ca"); //2.1. Название Группы Пользователя
+            //TODO            System.out.println(nameGroup);
+            //TODO<начало>Вывод структуры группы из ID группы
+//            AcsEmployeeGroup gp = networkService.getAcsEmployeeGroup("75c0f525-0851-4730-9edc-f16e955a32ca");
+//
+//            if (gp != null && gp.getEmployeeGroups() != null) {
+//                if (!gp.isIsRemoved()) {
+//                    printEmployeeGroup(gp, 0); // ✅ Теперь передаём один объект, а не список
+//                }
+//            }
+            //TODO<конец>Вывод структуры группы из ID группы
+            //TODO<начало>Вывод структуры группы из корневой группы
+//            ArrayOfAcsEmployeeGroup gp = getEmployeeGroups();  // "75c0f525-0851-4730-9edc-f16e955a32ca"-ID Сотрудники новая
+            // Выводим дерево с начальным отступом 0
+//            if (gp != null && gp.getAcsEmployeeGroup() != null) {
+//                printEmployeeGroups(gp.getAcsEmployeeGroup(), 0);
+//            }
+            //TODO<конец>Вывод структуры группы из корневой группы
+//            ArrayOfguid arrayOfGuids = new ArrayOfguid();
+//            arrayOfGuids.getGuid().add("75c0f525-0851-4730-9edc-f16e955a32ca");
+//          ***
+//            ArrayOfAcsEmployeeGroup temp_EmployeeGroups = networkService.getAcsEmployeeGroupsFull(false); //Аналог getEmployeeGroups
+//            temp_EmployeeGroups.getAcsEmployeeGroup().forEach(acsEmployeeGroup -> System.out.println(acsEmployeeGroup.getID() + " - " + acsEmployeeGroup.getName().getValue()));
+//          ***
+//    ???        LUserGroupsData tt = networkService.getUserGroups(0,100,UserGroupSortedColumn.NAME, SortOrder.ASCENDING); //Показывает ЛЕВЫЕ группы!!!
+//    ???        tt.getUserGroups().getValue().getLUserGroup().forEach(acsEmployeeGroup -> System.out.println(acsEmployeeGroup.getID() + " - " + acsEmployeeGroup.getName().getValue()));
+
+
+//            ArrayOfClaimInfo tt = networkService.getClaimsForUserGroup("75c0f525-0851-4730-9edc-f16e955a32ca");
+//        //tt.getUserGroups().getValue().getLUserGroup().forEach(acsEmployeeGroup -> System.out.println(acsEmployeeGroup.getID() + " - " + acsEmployeeGroup.getName().getValue()));
+
+
             //**************************
-            getEmployee("Квочкин", "Алексей", "Юрьевич"); //3. Поиск по Фио
-            getEmployeeById("8bcce3b1-2448-42f0-b61e-51bba707016f"); //4. Поиск по ID сотрудника
-            getEmployeePassagesByDate("8bcce3b1-2448-42f0-b61e-51bba707016f", LocalDate.of(2026, 1, 14)); //5. Поиск прохода
-            //            getAllEmployees(); //6. Поиск всех сотрудников
+//            getEmployee("Кокурин", "Максим", "Романович", true); //3. Поиск сотрудников по Фио
+//            getEmployee("Ермолаев", "Алексей", "Сергеевич", true); //3. Поиск сотрудников по Фио
+//            getEmployeeById("cc4990aa-b309-479e-a484-65e4abe80dfe"); //4. Поиск сотрудников в группе
+//            for (int i = 0; i < 31; i++) {
+//                getEmployeePassagesByDate("cc4990aa-b309-479e-a484-65e4abe80dfe", LocalDate.of(2026, 1, i+1)); //4. Поиск проходов по ID сотрудника
+//            }
+//            getEmployeePassagesByDate("4bf9f60a-da45-4646-b6cd-f8b0bdbaad75", LocalDate.of(2026, 1, 21)); //4. Поиск проходов по ID сотрудника
+            //            getAllEmployees(); //5. Поиск всех сотрудников
         } catch (Exception e) {
             System.err.println("Ошибка при выполнении поиска: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private static ArrayOfAcsEmployeeGroup getEmployeeGroups() {
+        ArrayOfAcsEmployeeGroup temp_EmployeeGroups = networkService.getAcsEmployeeGroups();
+//        temp_EmployeeGroups.getAcsEmployeeGroup().forEach(acsEmployeeGroup -> System.out.println(acsEmployeeGroup.getID() + " - " + acsEmployeeGroup.getName().getValue()));
+        return temp_EmployeeGroups;
+    }
+
+    private static String getGroupName(String IDGroup) {
+        AcsEmployeeGroup temp_EmployeeGroup = networkService.getAcsEmployeeGroup(IDGroup);
+
+        String nameOrEmpty = temp_EmployeeGroup != null && !temp_EmployeeGroup.isIsRemoved() && temp_EmployeeGroup.getName() != null ? temp_EmployeeGroup.getName().getValue() : "Удалена: ";
+        return nameOrEmpty;
     }
 
     private static void getEmployeesByGroupID(String idGroup) throws ILNetworkServiceGetAcsEmployeesGuidsByGroupsDataNotFoundExceptionFaultFaultMessage {
@@ -969,7 +1017,7 @@ public class RusGuardAcsIntegrationSample {
         }
     }
 
-    private static void getEmployee(String lastName, String firstName, String secondName) {
+    private static void getEmployee(String lastName, String firstName, String secondName, boolean isLock) {
         // Создаем условие поиска
         SearchCondition searchCondition = new SearchCondition();
 
@@ -1014,7 +1062,7 @@ public class RusGuardAcsIntegrationSample {
             java.util.List<AcsEmployeeFull> employees = new java.util.ArrayList<>();
             for (AcsEmployee employee : result.getAcsEmployee()) {
                 AcsEmployeeFull fullEmployee = getAcsEmployee(employee.getEmployeeID());
-                if (fullEmployee != null) {
+                if (fullEmployee != null && (!isLock || !fullEmployee.isIsLocked())) {
                     employees.add(fullEmployee);
                 }
             }
