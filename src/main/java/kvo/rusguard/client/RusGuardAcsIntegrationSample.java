@@ -1,43 +1,33 @@
 package kvo.rusguard.client;
 
 import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfguid;
+import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfint;
 import com.rusguard.client.*;
 import com.rusguard.client.ILNetworkConfigurationService;
-import com.rusguard.client.ILNetworkConfigurationServiceAddAcsEmployeeGroupArgumentExceptionFaultFaultMessage;
-import com.rusguard.client.ILNetworkConfigurationServiceAddAcsEmployeeGroupArgumentOutOfRangeExceptionFaultFaultMessage;
-import com.rusguard.client.ILNetworkConfigurationServiceAddAcsEmployeeGroupDataNotFoundExceptionFaultFaultMessage;
 
+import javax.xml.namespace.QName;
+
+import jakarta.xml.bind.JAXBElement;
+import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity_acs.AcsEmployeeSaveData;
+import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity_acs.AcsEmployeeSlim;
 import com.rusguard.client.ILNetworkService;
 import com.sun.xml.txw2.output.CharacterEscapeHandler;
-import jakarta.xml.bind.JAXBElement;
 
 import jakarta.xml.soap.*;
 import jakarta.xml.ws.handler.MessageContext;
 import jakarta.xml.ws.handler.soap.SOAPHandler;
 import jakarta.xml.ws.handler.soap.SOAPMessageContext;
+import jakarta.xml.ws.soap.SOAPFaultException;
 import org.apache.wss4j.dom.WSConstants;
 import org.apache.wss4j.dom.handler.WSHandlerConstants;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities.LDriverFullInfo;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities.LNetInfo;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities.LServerInfo;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities.SortOrder;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity.*;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity_acs.*;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity_acs_accesslevels.AcsAccessPointDriverInfo;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity_acs_accesslevels.ArrayOfAcsAccessPointDriverInfo;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_net_services.DeviceCallMethodOperation;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities.ArrayOfLNetInfo;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities.ArrayOfLServerInfo;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities.ArrayOfLDriverFullInfo;
-import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity.LogMsgType;
 
-import javax.net.ssl.*;
+
+import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities.*;
+
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.GregorianCalendar;
-import javax.xml.datatype.DatatypeConfigurationException;
 
-import javax.xml.namespace.QName;
 
 import jakarta.xml.ws.BindingProvider;
 
@@ -46,6 +36,8 @@ import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
 
 import org.apache.wss4j.common.ext.WSPasswordCallback;
+import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity.*;
+import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity_acs.*;
 import org.tempuri.LNetworkService;
 
 import java.io.IOException;
@@ -74,6 +66,7 @@ import org.apache.cxf.transport.http.HTTPConduit;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class RusGuardAcsIntegrationSample {
 
@@ -558,7 +551,7 @@ public class RusGuardAcsIntegrationSample {
         }
     }
 
-
+    // Устанавливает флаг наследования доступов. Нужно снять (false) для ручного проставления доступа!!!
     public static void setUseEmployeeParentAccessLevel(String employeeID, boolean isUseParentAccessLevel) {
         try {
             networkCnfgService.setUseEmployeeParentAccessLevel(
@@ -905,6 +898,7 @@ public class RusGuardAcsIntegrationSample {
 
         if (subGroupsElement != null) {
             ArrayOfAcsEmployeeGroup subGroups = subGroupsElement.getValue();
+
             if (subGroups != null && subGroups.getAcsEmployeeGroup() != null) {
                 // Рекурсивно обрабатываем список подгрупп
                 for (AcsEmployeeGroup childGroup : subGroups.getAcsEmployeeGroup()) {
@@ -928,15 +922,66 @@ public class RusGuardAcsIntegrationSample {
             System.out.println("Classpath: " + System.getProperty("java.class.path"));
             // Инициализация сервисов
             initServices();
-            //TODO            setEmployeeLocked("4dd89565-74f0-493f-9812-519242d8124d", false); //1. Блокировать / разблокировать пользователя - Нет прав!!! (4dd89565-74f0-493f-9812-519242d8124d - Карлышев А)
+
+
+
+            //Уровень доступа (вывод только PIONT ACCESS)
+//TODO             getAccessLevelsSlim()
+//            .forEach(ccessLevelsSlim -> {
+//                System.out.print(ccessLevelsSlim.getId());
+//                System.out.print(" " + ccessLevelsSlim.getName().getValue());
+//                System.out.print(" " + ccessLevelsSlim.getDescription().getValue());
+//                System.out.print(" " + ccessLevelsSlim.getEndDate().getValue());
+//                System.out.println();
+//            });
+
+//TODO                    GetEmployeesByTabelNumber(766291);
+
+            //            setEmployeeLocked("4dd89565-74f0-493f-9812-519242d8124d", false); //1. Блокировать / разблокировать пользователя - (4dd89565-74f0-493f-9812-519242d8124d - Карлышев А)
+
+//            addEmailEmployee("77ec9c4f-3ee6-4ad3-a10d-527f8aff6359", "pchelintcevSV3@itsnn.ru", "рабочая почта"); //2. Добавить email
+//TODO не работает            remoteEmailByID();
+//TODO не работает            addEmployee();
+//TODO         2.1.  Добавить нового пользователя
+//            AcsEmployeeSlim acsEmployeeSlim = addEmployee(
+//                    "Имя"
+//                    , "Фамилия"
+//                    , "Отчество"
+//                    , 654321
+//                    , "2129e300-520e-4ec3-a95a-8b5c7dfb34a7"
+//                    , "901cb40e-fce2-47bb-9b0e-d3ca2087a22d"
+//                    , "Комментарий тестового пользователя"
+//                    , "Адрес регистрации пользователя"
+//                    , "WWWW"
+//                    , "ITSNN.RU");
+//            System.out.println("Создан пользователь ID: "
+//                    + acsEmployeeSlim.getID()
+//                    + " Фамилия: " + acsEmployeeSlim.getFirstName().getValue()
+//                    + " Имя: " + acsEmployeeSlim.getSecondName().getValue()
+//                    + " Отчество: " + acsEmployeeSlim.getLastName().getValue()
+//                    + " Табельный номер: " + acsEmployeeSlim.getNumber().getValue());
+//            getEmployeesByGroupID("901cb40e-fce2-47bb-9b0e-d3ca2087a22d"); //2. Поиск сотрудников по ID Group
+
+//TODO         2.2.            updateEmployeByID("8f3d00e6-a595-43fa-9d85-6252b426c8e1", testEmployee(), false); //изменение Пользователя (isLock = false - для изменения, isLock = true - без изменения(блокировка))
+//            networkCnfgService.removeEmailAddress(arrayOfguid,false);
             //По IDGroup найти всех Employees
 //            System.out.println("Поиск сотрудников по ID Group");
-            //TODO            getEmployeesByGroupID("901cb40e-fce2-47bb-9b0e-d3ca2087a22d"); //2. Поиск сотрудников по ID Group
-            //TODO            String nameGroup = getGroupName("75c0f525-0851-4730-9edc-f16e955a32ca"); //2.1. Название Группы Пользователя
+//TODO                      getEmployeesByGroupID("901cb40e-fce2-47bb-9b0e-d3ca2087a22d"); //3. Поиск сотрудников по ID Group
+            //**************************
+//TODO           getEmployee("Кокурин", "Максим", "Романович", true); //3.1. Поиск сотрудников по Фио
+//            getEmployee("Ермолаев", "Алексей", "Сергеевич", true); // Поиск сотрудников по Фио
+//TODO            getEmployeeById("cc4990aa-b309-479e-a484-65e4abe80dfe"); //3.2. Поиск сотрудников по ID сотрудника
+//TODO            for (int i = 0; i < 31; i++) {
+//TODO                getEmployeePassagesByDate("cc4990aa-b309-479e-a484-65e4abe80dfe", LocalDate.of(2026, 1, i+1)); //3.3. Поиск проходов по ID сотрудника
+//TODO            }
+            getEmployeePassagesByDate("4bf9f60a-da45-4646-b6cd-f8b0bdbaad75", LocalDate.of(2026, 1, 21)); // Поиск проходов по ID сотрудника
+
+//TODO            getAllEmployees(); //3.4. Поиск всех сотрудников
+
+            //TODO            String nameGroup = getGroupName("75c0f525-0851-4730-9edc-f16e955a32ca"); //4. Название Группы Пользователя
             //TODO            System.out.println(nameGroup);
             //TODO<начало>Вывод структуры группы из ID группы
-//            AcsEmployeeGroup gp = networkService.getAcsEmployeeGroup("75c0f525-0851-4730-9edc-f16e955a32ca");
-//
+//            AcsEmployeeGroup gp = networkService.getAcsEmployeeGroup("75c0f525-0851-4730-9edc-f16e955a32ca"); //4.1. Дерево групп (Вывод структуры группы из ID группы)
 //            if (gp != null && gp.getEmployeeGroups() != null) {
 //                if (!gp.isIsRemoved()) {
 //                    printEmployeeGroup(gp, 0); // ✅ Теперь передаём один объект, а не список
@@ -944,39 +989,394 @@ public class RusGuardAcsIntegrationSample {
 //            }
             //TODO<конец>Вывод структуры группы из ID группы
             //TODO<начало>Вывод структуры группы из корневой группы
-//            ArrayOfAcsEmployeeGroup gp = getEmployeeGroups();  // "75c0f525-0851-4730-9edc-f16e955a32ca"-ID Сотрудники новая
-            // Выводим дерево с начальным отступом 0
+//            ArrayOfAcsEmployeeGroup gp = getEmployeeGroups();  // //4.2. Дерево групп -"75c0f525-0851-4730-9edc-f16e955a32ca"-ID Сотрудники новая
+////             Выводим дерево с начальным отступом 0
 //            if (gp != null && gp.getAcsEmployeeGroup() != null) {
 //                printEmployeeGroups(gp.getAcsEmployeeGroup(), 0);
 //            }
             //TODO<конец>Вывод структуры группы из корневой группы
-//            ArrayOfguid arrayOfGuids = new ArrayOfguid();
+//            ArrayOfguid arrayOfGuids = new ArrayOfguid(); //4.3.
 //            arrayOfGuids.getGuid().add("75c0f525-0851-4730-9edc-f16e955a32ca");
 //          ***
 //            ArrayOfAcsEmployeeGroup temp_EmployeeGroups = networkService.getAcsEmployeeGroupsFull(false); //Аналог getEmployeeGroups
 //            temp_EmployeeGroups.getAcsEmployeeGroup().forEach(acsEmployeeGroup -> System.out.println(acsEmployeeGroup.getID() + " - " + acsEmployeeGroup.getName().getValue()));
 //          ***
-//    ???        LUserGroupsData tt = networkService.getUserGroups(0,100,UserGroupSortedColumn.NAME, SortOrder.ASCENDING); //Показывает ЛЕВЫЕ группы!!!
-//    ???        tt.getUserGroups().getValue().getLUserGroup().forEach(acsEmployeeGroup -> System.out.println(acsEmployeeGroup.getID() + " - " + acsEmployeeGroup.getName().getValue()));
+//TODO ???       LUserGroupsData tt = networkService.getUserGroups(0,500,UserGroupSortedColumn.NAME, SortOrder.ASCENDING); //Показывает ЛЕВЫЕ группы!!!
+//TODO ???       tt.getUserGroups().getValue().getLUserGroup().forEach(acsEmployeeGroup -> System.out.println(acsEmployeeGroup.getID() + " - " + acsEmployeeGroup.getName().getValue()));
 
-
-//            ArrayOfClaimInfo tt = networkService.getClaimsForUserGroup("75c0f525-0851-4730-9edc-f16e955a32ca");
+//            ArrayOfClaimInfo tt = networkService.getClaimsForUserGroup("0fe4bb1a-7d11-457d-bda7-f6b3a0f315cc");
 //        //tt.getUserGroups().getValue().getLUserGroup().forEach(acsEmployeeGroup -> System.out.println(acsEmployeeGroup.getID() + " - " + acsEmployeeGroup.getName().getValue()));
 
-
-            //**************************
-//            getEmployee("Кокурин", "Максим", "Романович", true); //3. Поиск сотрудников по Фио
-//            getEmployee("Ермолаев", "Алексей", "Сергеевич", true); //3. Поиск сотрудников по Фио
-//            getEmployeeById("cc4990aa-b309-479e-a484-65e4abe80dfe"); //4. Поиск сотрудников в группе
-//            for (int i = 0; i < 31; i++) {
-//                getEmployeePassagesByDate("cc4990aa-b309-479e-a484-65e4abe80dfe", LocalDate.of(2026, 1, i+1)); //4. Поиск проходов по ID сотрудника
-//            }
-//            getEmployeePassagesByDate("4bf9f60a-da45-4646-b6cd-f8b0bdbaad75", LocalDate.of(2026, 1, 21)); //4. Поиск проходов по ID сотрудника
-            //            getAllEmployees(); //5. Поиск всех сотрудников
         } catch (Exception e) {
             System.err.println("Ошибка при выполнении поиска: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private static boolean updateEmployeByID(String ID, AcsEmployeeSaveData employeeData, boolean isLock) {
+        boolean changeLock;
+        if (isLock) {
+            changeLock = true;
+        } else changeLock = isLock;
+        employeeData.setIsChangeLocked(changeLock);
+        // ✅ Вызываем сервис
+//        AcsEmployeeSlim result = saveAcsEmployee(ID, employeeData); //"8f3d00e6-a595-43fa-9d85-6252b426c8e1"
+        try {
+            saveAcsEmployee(ID, employeeData); //"8f3d00e6-a595-43fa-9d85-6252b426c8e1"
+//            result = networkCnfgService.addAcsEmployee(positionGroup, employeeData);
+//        } catch (ILNetworkConfigurationServiceAddAcsEmployeeArgumentNullExceptionFaultFaultMessage e) {
+//            System.err.println("Ошибка: обязательное поле не передано — " + e.getFaultInfo().toString());
+//        } catch (ILNetworkConfigurationServiceAddAcsEmployeeDataAlreadyExistsExceptionFaultFaultMessage e) {
+//            System.err.println("Ошибка: сотрудник с такими данными уже существует — " + e.getFaultInfo().toString());
+//        } catch (ILNetworkConfigurationServiceAddAcsEmployeeDataNotFoundExceptionFaultFaultMessage e) {
+//            System.err.println("Ошибка: группа или должность не найдены — " + e.getFaultInfo().toString());
+        } catch (Exception e) {
+            System.err.println("Неожиданная ошибка: " + e.getMessage());
+            return false;
+        }
+        return true;
+
+    }
+
+    private static AcsEmployeeSaveData testEmployee() {
+        QName EMPLOYEE_POSITION_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "EmployeePositionID"
+        );
+        QName EMPLOYEE_FIRSTNAME_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "FirstName"
+        );
+        QName EMPLOYEE_LASTNAME_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "LastName"
+        );
+        QName EMPLOYEE_SECONDNAME_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "SecondName"
+        );
+        QName EMPLOYEE_COMMENT_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "Comment"
+        );
+        QName EMPLOYEE_ADRESSREG_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "RegistrationAddress"
+        );
+        QName EMPLOYEE_NUMBER_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "Number"
+        );
+        QName EMPLOYEE_PASPORTIISUE_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "PassportIssue"
+        );
+        QName EMPLOYEE_PASPORTNOMBER_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "PassportNumber"
+        );
+
+        AcsEmployeeSaveData employeeData = new AcsEmployeeSaveData(); // Создаём объект данных сотрудника
+
+        // ✅ Оборачиваем в JAXBElement
+//        JAXBElement<String> employeePositionID = new JAXBElement<>(
+//                EMPLOYEE_POSITION_ID_QNAME,   // Имя и пространство имён элемента
+//                String.class,                 // Тип значения
+//                position                       // Значение — ID должности из вашей системы
+//        );
+        JAXBElement<String> employeeFirstName = new JAXBElement<>(
+                EMPLOYEE_FIRSTNAME_ID_QNAME,
+                String.class,
+                "Тест Имя"
+        );
+        JAXBElement<String> employeeLastName = new JAXBElement<>(
+                EMPLOYEE_LASTNAME_ID_QNAME,
+                String.class,
+                "Тест Фамилия"
+        );
+        JAXBElement<String> employeeSecondName = new JAXBElement<>(
+                EMPLOYEE_SECONDNAME_ID_QNAME,
+                String.class,
+                "Тест Отчество"
+        );
+        JAXBElement<String> employeeComment = new JAXBElement<>(
+                EMPLOYEE_COMMENT_ID_QNAME,
+                String.class,
+                "Тест комментарий"
+        );
+        JAXBElement<String> employeeAdressReg = new JAXBElement<>(
+                EMPLOYEE_ADRESSREG_ID_QNAME,
+                String.class,
+                "Тест Адрес регистрации"
+        );
+        JAXBElement<String> employeePassportIISUE = new JAXBElement<>(
+                EMPLOYEE_PASPORTIISUE_ID_QNAME,
+                String.class,
+                "TEST"
+        );
+        JAXBElement<String> employeePassportNumber = new JAXBElement<>(
+                EMPLOYEE_PASPORTNOMBER_ID_QNAME,
+                String.class,
+                "333000"
+        );
+        JAXBElement<Integer> employeeNumber = new JAXBElement<>(
+                EMPLOYEE_NUMBER_ID_QNAME,
+                Integer.class,
+                121212
+        );
+        // ✅ Устанавливаем другие поля (опционально)
+//        employeeData.setEmployeePositionID(employeePositionID);
+//        employeeData.setIsChangeLocked(changeLock);   // true — запретить изменение /false-разрешить
+        employeeData.setIsChangePin(false);     // false — не требовать смены PIN
+        employeeData.setFirstName(employeeFirstName);
+        employeeData.setLastName(employeeLastName);
+        employeeData.setSecondName(employeeSecondName);
+        employeeData.setNumber(employeeNumber);
+//        employeeData.setEmployeePositionID(employeePositionID);
+        employeeData.setComment(employeeComment);
+        employeeData.setRegistrationAddress(employeeAdressReg);
+        employeeData.setPassportIssue(employeePassportIISUE);
+        employeeData.setPassportNumber(employeePassportNumber);
+        return employeeData;
+    }
+
+    private static List<AcsAccessLevelSlimInfo> getAccessLevelsSlim() {
+        List<AcsAccessLevelSlimInfo> accessLevels = networkService.getAcsAccessLevelsSlimInfo().getAcsAccessLevelSlimInfo();
+
+        return accessLevels.stream()
+                .filter(tt -> !tt.isIsRemoved()) // фильтруем удалённые
+                .sorted(Comparator.comparing(
+                        tt -> {
+                            String name = tt.getName() != null ? tt.getName().getValue() : "";
+                            return name.length() >= 4 ? name.substring(0, 4) : name; // первые 4 или всё, если меньше
+                        }
+                        ))
+                .collect(Collectors.toList());
+    }
+
+    private static ArrayOfAcsEmployeeFull GetEmployeesByTabelNumber(Integer tabelNumber) {
+        ArrayOfint arrayTabelNumber=new ArrayOfint();
+        arrayTabelNumber.getInt().add(tabelNumber);
+        ArrayOfAcsEmployeeFull arrayOfAcsEmployeeFull = networkService.getAcsEmployeesByTableNumbers(arrayTabelNumber);
+        if (arrayOfAcsEmployeeFull.getAcsEmployeeFull().size()==0) {
+            return arrayOfAcsEmployeeFull;
+        }
+        for (  AcsEmployeeFull AcsEmployee:  arrayOfAcsEmployeeFull.getAcsEmployeeFull()) {
+            System.out.println(AcsEmployee.getID()
+                    + " "  + AcsEmployee.getLastName().getValue()
+                    + " " + AcsEmployee.getFirstName().getValue()
+                    + " "  + AcsEmployee.getSecondName().getValue()
+                    + " "  + AcsEmployee.getEmployeeGroupID()
+                    + " "  + AcsEmployee.getNumber().getValue()
+                    + " isIsRemoved: " + AcsEmployee.isIsRemoved().booleanValue());
+        }
+        return arrayOfAcsEmployeeFull;
+    }
+
+    private static AcsEmployeeSlim addEmployee(String firstname, String lastname, String secondname, Integer tabelNumber, String position, String positionGroup, String Comment, String AdressReg, String PassportIISUE, String PassportNumber) {
+
+        QName EMPLOYEE_POSITION_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "EmployeePositionID"
+        );
+        QName EMPLOYEE_FIRSTNAME_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "FirstName"
+        );
+        QName EMPLOYEE_LASTNAME_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "LastName"
+        );
+        QName EMPLOYEE_SECONDNAME_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "SecondName"
+        );
+        QName EMPLOYEE_COMMENT_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "Comment"
+        );
+        QName EMPLOYEE_ADRESSREG_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "RegistrationAddress"
+        );
+        QName EMPLOYEE_NUMBER_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "Number"
+        );
+        QName EMPLOYEE_PASPORTIISUE_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "PassportIssue"
+        );
+        QName EMPLOYEE_PASPORTNOMBER_ID_QNAME = new QName(
+                "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees",
+                "PassportNumber"
+        );
+
+        AcsEmployeeSaveData employeeData = new AcsEmployeeSaveData(); // Создаём объект данных сотрудника
+        // ✅ Оборачиваем в JAXBElement
+        JAXBElement<String> employeePositionID = new JAXBElement<>(
+                EMPLOYEE_POSITION_ID_QNAME,   // Имя и пространство имён элемента
+                String.class,                 // Тип значения
+                position                       // Значение — ID должности из вашей системы
+        );
+        JAXBElement<String> employeeFirstName = new JAXBElement<>(
+                EMPLOYEE_FIRSTNAME_ID_QNAME,
+                String.class,
+                firstname
+        );
+        JAXBElement<String> employeeLastName = new JAXBElement<>(
+                EMPLOYEE_LASTNAME_ID_QNAME,
+                String.class,
+                lastname
+        );
+        JAXBElement<String> employeeSecondName = new JAXBElement<>(
+                EMPLOYEE_SECONDNAME_ID_QNAME,
+                String.class,
+                secondname
+        );
+        JAXBElement<String> employeeComment = new JAXBElement<>(
+                EMPLOYEE_COMMENT_ID_QNAME,
+                String.class,
+                Comment
+        );
+        JAXBElement<String> employeeAdressReg = new JAXBElement<>(
+                EMPLOYEE_ADRESSREG_ID_QNAME,
+                String.class,
+                AdressReg
+        );
+        JAXBElement<String> employeePassportIISUE = new JAXBElement<>(
+                EMPLOYEE_PASPORTIISUE_ID_QNAME,
+                String.class,
+                PassportIISUE
+        );
+        JAXBElement<String> employeePassportNumber = new JAXBElement<>(
+                EMPLOYEE_PASPORTNOMBER_ID_QNAME,
+                String.class,
+                PassportNumber
+        );
+        JAXBElement<Integer> employeeNumber = new JAXBElement<>(
+                EMPLOYEE_NUMBER_ID_QNAME,
+                Integer.class,
+                tabelNumber
+        );
+        // ✅ Устанавливаем другие поля (опционально)
+        employeeData.setEmployeePositionID(employeePositionID);
+        employeeData.setIsChangeLocked(true);   // true — запретить изменение
+        employeeData.setIsChangePin(false);     // false — не требовать смены PIN
+        employeeData.setFirstName(employeeFirstName);
+        employeeData.setLastName(employeeLastName);
+        employeeData.setSecondName(employeeSecondName);
+        employeeData.setNumber(employeeNumber);
+        employeeData.setEmployeePositionID(employeePositionID);
+        employeeData.setComment(employeeComment);
+        employeeData.setRegistrationAddress(employeeAdressReg);
+        employeeData.setPassportIssue(employeePassportIISUE);
+        employeeData.setPassportNumber(employeePassportNumber);
+        // ✅ Вызываем сервис
+        AcsEmployeeSlim result = new AcsEmployeeSlim();
+
+        try {
+            result = networkCnfgService.addAcsEmployee(positionGroup, employeeData);
+        } catch (ILNetworkConfigurationServiceAddAcsEmployeeArgumentNullExceptionFaultFaultMessage e) {
+            System.err.println("Ошибка: обязательное поле не передано — " + e.getFaultInfo().toString());
+        } catch (ILNetworkConfigurationServiceAddAcsEmployeeDataAlreadyExistsExceptionFaultFaultMessage e) {
+            System.err.println("Ошибка: сотрудник с такими данными уже существует — " + e.getFaultInfo().toString());
+        } catch (ILNetworkConfigurationServiceAddAcsEmployeeDataNotFoundExceptionFaultFaultMessage e) {
+            System.err.println("Ошибка: группа или должность не найдены — " + e.getFaultInfo().toString());
+        } catch (Exception e) {
+            System.err.println("Неожиданная ошибка: " + e.getMessage());
+        }
+        return result;
+    }
+
+    private static void remoteEmailByID() {
+        try {
+            ArrayOfguid subjectIDs = new ArrayOfguid();
+            subjectIDs.getGuid().add("77ec9c4f-3ee6-4ad3-a10d-527f8aff6359");
+
+            // ✅ Передаём строку, а не UUID — потому что JAXB генерирует List<String>
+            //                ArrayOfguidWrapper wrapper = new ArrayOfguidWrapper();
+//                wrapper.getIds().add("77ec9c4f-3ee6-4ad3-a10d-527f8aff6359");
+//                networkCnfgService.removeEmailAddress(wrapper.toOriginal(), false);
+            networkCnfgService.removeEmailAddress(subjectIDs, false);
+            System.out.println("Email address successfully removed.");
+
+        } catch (SOAPFaultException e) {
+            System.err.println("SOAP Fault: " + e.getFault().getFaultString());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Unexpected error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private static void addEmailEmployee(String IDEmployee, String email, String description) throws ILNetworkConfigurationServiceAddEmailAddressDataAlreadyExistsExceptionFaultFaultMessage,
+            ILNetworkConfigurationServiceAddEmailAddressArgumentExceptionFaultFaultMessage,
+            ILNetworkConfigurationServiceAddEmailAddressDataNotFoundExceptionFaultFaultMessage,
+            ILNetworkConfigurationServiceAddEmailAddressArgumentNullExceptionFaultFaultMessage,
+            ILNetworkConfigurationServiceAddEmailAddressArgumentOutOfRangeExceptionFaultFaultMessage {
+
+        // 🔒 Валидация входных данных
+        if (IDEmployee == null || IDEmployee.trim().isEmpty()) {
+            throw new IllegalArgumentException("IDEmployee cannot be null or empty");
+        }
+        if (email == null || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be null or empty");
+        }
+        if (description == null) {
+            description = "";
+        }
+
+        // 🔍 Получаем namespace динамически (без жёсткого кодирования)
+//        try {
+        //TODO выяснить где взять динамически namespace
+//            Field emailField = EmailAddressSaveData.class.getDeclaredField("email");
+//            String namespace = emailField.getAnnotation(XmlElement.class).namespace();
+        String namespace = "http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ContactInformation";
+        // ✅ Создаём все элементы через JAXBElement с правильным namespace
+        JAXBElement<String> emailElement = new JAXBElement<>(
+                new QName(namespace, "Email"),
+                String.class,
+                email
+        );
+        JAXBElement<String> descriptionElement = new JAXBElement<>(
+                new QName(namespace, "Description"),
+                String.class,
+                description
+        );
+        Integer emailOrderElement = 1;
+
+        // ✅ Собираем объект
+        EmailAddressSaveData data = new EmailAddressSaveData();
+        data.setEmail(emailElement);
+        data.setDescription(descriptionElement);
+        data.setEmailOrder(emailOrderElement); // ✅ Важно: не setEmailOrder(1)!
+
+        // 🔍 Проверка сервиса
+        if (networkCnfgService == null) {
+            throw new IllegalStateException("Network configuration service is not initialized");
+        }
+
+        // ✅ Вызов сервиса с обработкой исключений
+        try {
+            networkCnfgService.addEmailAddress(
+                    EmailAddressOwner.EMPLOYEE,
+                    IDEmployee,
+                    data,
+                    true
+            );
+            System.out.printf("Email %s successfully added for employee %s", email, IDEmployee);
+        } catch (ILNetworkConfigurationServiceAddEmailAddressDataAlreadyExistsExceptionFaultFaultMessage e) {
+            System.out.printf("Email %s already exists for employee %s", email, IDEmployee);
+            throw e;
+        } catch (Exception e) {
+            System.out.printf("Failed to add email %s for employee %s: %s, %s", email, IDEmployee, e.getMessage(), e);
+            throw new RuntimeException("Failed to add email: " + e.getMessage(), e);
+        }
+
+//        } catch (NoSuchFieldException e) {
+//            throw new IllegalStateException("Cannot find 'email' field in EmailAddressSaveData class: ", e);
+//        }
     }
 
     private static ArrayOfAcsEmployeeGroup getEmployeeGroups() {
@@ -1157,6 +1557,7 @@ public class RusGuardAcsIntegrationSample {
             e.printStackTrace();
         }
     }
+
 
     private static void getEmployeePassagesByDate(String employeeId, LocalDate date) {
         if (employeeId == null || employeeId.isBlank()) {

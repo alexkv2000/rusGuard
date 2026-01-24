@@ -1,1 +1,705 @@
-﻿<?xml version="1.0" encoding="utf-8"?><xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/"><xs:import schemaLocation="xsd1.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/><xs:import schemaLocation="xsd19.xsd" namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AlcoGroup"/><xs:import schemaLocation="xsd16.xsd" namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/><xs:import schemaLocation="xsd25.xsd" namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AccessLevels"/><xs:import schemaLocation="xsd17.xsd" namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AcsKeys"/><xs:import schemaLocation="xsd27.xsd" namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS"/><xs:import schemaLocation="xsd14.xsd" namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.TimeTracking"/><xs:import schemaLocation="xsd2.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/><xs:import schemaLocation="xsd51.xsd" namespace="http://schemas.datacontract.org/2004/07/System.Data"/><xs:complexType name="SearchCondition"><xs:sequence><xs:element minOccurs="0" name="AddField" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="AdditionalFieldID" nillable="true" type="ser:guid"/><xs:element minOccurs="0" name="AlcoGroupID" nillable="true" type="ser:guid"/><xs:element minOccurs="0" name="AssignmentFilter" type="q1:AssignmentFilter" xmlns:q1="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AlcoGroup"/><xs:element minOccurs="0" name="Birthday" nillable="true" type="xs:dateTime"/><xs:element minOccurs="0" name="CurrentSort" type="tns:EmployeeSortedColumn"/><xs:element minOccurs="0" name="DrivingLicenseNumber" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="Email" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="EmployeeAssignmentType" type="q2:EmployeeAssignmentType" xmlns:q2="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AlcoGroup"/><xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="GroupID" nillable="true" type="ser:guid"/><xs:element minOccurs="0" name="IncludeRemoved" type="xs:boolean"/><xs:element minOccurs="0" name="InternationalPassportNumber" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="IsFullMatch" type="xs:boolean"/><xs:element minOccurs="0" name="IsGlobalSearch" type="xs:boolean"/><xs:element minOccurs="0" name="KeyDescription" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="KeyNumber" nillable="true" type="xs:long"/><xs:element minOccurs="0" name="KeySortNumer" type="xs:int"/><xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="SearchWay" type="tns:SearchWay"/><xs:element minOccurs="0" name="SecondName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="SortOrder" type="q3:SortOrder" xmlns:q3="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/><xs:element minOccurs="0" name="TableNumber" nillable="true" type="xs:int"/></xs:sequence></xs:complexType><xs:element name="SearchCondition" nillable="true" type="tns:SearchCondition"/><xs:simpleType name="EmployeeSortedColumn"><xs:restriction base="xs:string"><xs:enumeration value="None"/><xs:enumeration value="FullName"/><xs:enumeration value="LastName"/><xs:enumeration value="FirstName"/><xs:enumeration value="SecondName"/><xs:enumeration value="TabNumber"/><xs:enumeration value="Position"/><xs:enumeration value="Satatus"/><xs:enumeration value="FirstKey"/><xs:enumeration value="SecondKey"/><xs:enumeration value="AccessLevel"/><xs:enumeration value="WorkSchedule"/><xs:enumeration value="WorkZone"/><xs:enumeration value="IsPhotoAny"/><xs:enumeration value="GroupPath"/><xs:enumeration value="ModificationDateTime"/><xs:enumeration value="CreationDateTime"/><xs:enumeration value="RowNumberKey"/><xs:enumeration value="AllKeys"/><xs:enumeration value="IsVehicleAny"/></xs:restriction></xs:simpleType><xs:element name="EmployeeSortedColumn" nillable="true" type="tns:EmployeeSortedColumn"/><xs:simpleType name="SearchWay"><xs:restriction base="xs:string"><xs:enumeration value="FIO"/><xs:enumeration value="TableNumber"/><xs:enumeration value="Keys"/><xs:enumeration value="Email"/><xs:enumeration value="Phone"/><xs:enumeration value="Birthday"/><xs:enumeration value="PassportNumber"/><xs:enumeration value="AddField"/><xs:enumeration value="InternationalNumber"/><xs:enumeration value="DrivingLicenseNumber"/></xs:restriction></xs:simpleType><xs:element name="SearchWay" nillable="true" type="tns:SearchWay"/><xs:complexType name="ArrayOfAcsEmployee"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployee" nillable="true" type="tns:AcsEmployee"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployee" nillable="true" type="tns:ArrayOfAcsEmployee"/><xs:complexType name="AcsEmployee"><xs:sequence><xs:element minOccurs="0" name="EmployeeID" type="ser:guid"/><xs:element minOccurs="0" name="GroupID" type="ser:guid"/></xs:sequence></xs:complexType><xs:element name="AcsEmployee" nillable="true" type="tns:AcsEmployee"/><xs:simpleType name="GroupTypeSearch"><xs:restriction base="xs:string"><xs:enumeration value="Name"/><xs:enumeration value="Code"/><xs:enumeration value="Description"/></xs:restriction></xs:simpleType><xs:element name="GroupTypeSearch" nillable="true" type="tns:GroupTypeSearch"/><xs:simpleType name="VehicleTypeSearch"><xs:restriction base="xs:string"><xs:enumeration value="Name"/><xs:enumeration value="Brand"/><xs:enumeration value="RegistrationNumber"/><xs:enumeration value="Keys"/><xs:enumeration value="Color"/></xs:restriction></xs:simpleType><xs:element name="VehicleTypeSearch" nillable="true" type="tns:VehicleTypeSearch"/><xs:complexType name="EmployeesInfoData"><xs:sequence><xs:element minOccurs="0" name="Count" type="xs:long"/><xs:element minOccurs="0" name="Employees" nillable="true" type="tns:ArrayOfAcsEmployeeSlim"/><xs:element minOccurs="0" name="FoundIndex" type="xs:int"/><xs:element minOccurs="0" name="IsFound" type="xs:boolean"/><xs:element minOccurs="0" name="PageNumber" type="xs:int"/></xs:sequence></xs:complexType><xs:element name="EmployeesInfoData" nillable="true" type="tns:EmployeesInfoData"/><xs:complexType name="ArrayOfAcsEmployeeSlim"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeSlim" nillable="true" type="tns:AcsEmployeeSlim"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeeSlim" nillable="true" type="tns:ArrayOfAcsEmployeeSlim"/><xs:complexType name="AcsEmployeeSlim"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeSlimBase"><xs:sequence><xs:element minOccurs="0" name="AccessLevels" nillable="true" type="q4:ArrayOfAcsAccessLevelSlimInfo" xmlns:q4="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AccessLevels"/><xs:element minOccurs="0" name="CreationDateTime" type="xs:dateTime"/><xs:element minOccurs="0" name="EmployeeGroupID" type="ser:guid"/><xs:element minOccurs="0" name="EmployeeGroupPath" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ID" type="ser:guid"/><xs:element minOccurs="0" name="IsAccessLevelsInherited" type="xs:boolean"/><xs:element minOccurs="0" name="IsPhotoAny" type="xs:boolean"/><xs:element minOccurs="0" name="IsRemoved" type="xs:boolean"/><xs:element minOccurs="0" name="IsVehicleAny" type="xs:boolean"/><xs:element minOccurs="0" name="IsWorkSchedulesInherited" type="xs:boolean"/><xs:element minOccurs="0" name="IsWorkZonesInherited" type="xs:boolean"/><xs:element minOccurs="0" name="Keys" nillable="true" type="q5:ArrayOfAcsKeyInfo" xmlns:q5="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AcsKeys"/><xs:element minOccurs="0" name="ModificationDateTime" type="xs:dateTime"/><xs:element minOccurs="0" name="Position" nillable="true" type="q6:LEmployeePositionInfo" xmlns:q6="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS"/><xs:element minOccurs="0" name="RowNumber" nillable="true" type="xs:long"/><xs:element minOccurs="0" name="WorkSchedules" nillable="true" type="q7:ArrayOfWorkScheduleSlimInfo" xmlns:q7="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.TimeTracking"/><xs:element minOccurs="0" name="WorkZones" nillable="true" type="q8:ArrayOfWorkZoneSlimInfo" xmlns:q8="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.TimeTracking"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeSlim" nillable="true" type="tns:AcsEmployeeSlim"/><xs:complexType name="AcsEmployeeSlimBase"><xs:sequence><xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="IsLocked" type="xs:boolean"/><xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="Number" nillable="true" type="xs:int"/><xs:element minOccurs="0" name="SecondName" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="AcsEmployeeSlimBase" nillable="true" type="tns:AcsEmployeeSlimBase"/><xs:complexType name="EmployeesFilter"><xs:sequence><xs:element minOccurs="0" name="AccessLevelsIds" nillable="true" type="q9:ArrayOfguid" xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/><xs:element minOccurs="0" name="CardTypesIds" nillable="true" type="q10:ArrayOfguid" xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/><xs:element minOccurs="0" name="FirstNameContains" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="IsFirstNameSigned" type="xs:boolean"/><xs:element minOccurs="0" name="IsFirstNameUnsigned" type="xs:boolean"/><xs:element minOccurs="0" name="IsKeyCardTypeUnsigned" type="xs:boolean"/><xs:element minOccurs="0" name="IsKeyNotValid" type="xs:boolean"/><xs:element minOccurs="0" name="IsKeyNumber" type="xs:boolean"/><xs:element minOccurs="0" name="IsKeySiteCode" nillable="true" type="xs:boolean"/><xs:element minOccurs="0" name="IsKeyUnsigned" type="xs:boolean"/><xs:element minOccurs="0" name="IsKeyValid" type="xs:boolean"/><xs:element minOccurs="0" name="IsLastNameSigned" type="xs:boolean"/><xs:element minOccurs="0" name="IsLastNameUnsigned" type="xs:boolean"/><xs:element minOccurs="0" name="IsLock" type="xs:boolean"/><xs:element minOccurs="0" name="IsSecondNameSigned" type="xs:boolean"/><xs:element minOccurs="0" name="IsSecondNameUnsigned" type="xs:boolean"/><xs:element minOccurs="0" name="IsShowEmptyAccessLevls" type="xs:boolean"/><xs:element minOccurs="0" name="IsTabNumberSigned" type="xs:boolean"/><xs:element minOccurs="0" name="IsTabNumberUnsigned" type="xs:boolean"/><xs:element minOccurs="0" name="IsUnlock" type="xs:boolean"/><xs:element minOccurs="0" name="KeyAfterSiteCode" nillable="true" type="xs:short"/><xs:element minOccurs="0" name="KeyCommentContains" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="KeyNumber" nillable="true" type="xs:long"/><xs:element minOccurs="0" name="KeySiteCode" nillable="true" type="xs:int"/><xs:element minOccurs="0" name="LastNameContains" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="SecondNameContains" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="TabNumberContains" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="TabNumberEquals" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="EmployeesFilter" nillable="true" type="tns:EmployeesFilter"/><xs:complexType name="EmployeeShowColumn"><xs:sequence><xs:element minOccurs="0" name="IsIncludeAccessLevels" type="xs:boolean"/><xs:element minOccurs="0" name="IsIncludeCreationDateTime" type="xs:boolean"/><xs:element minOccurs="0" name="IsIncludeKeys" type="xs:boolean"/><xs:element minOccurs="0" name="IsIncludeModificationDateTime" type="xs:boolean"/><xs:element minOccurs="0" name="IsIncludePhotoAny" type="xs:boolean"/><xs:element minOccurs="0" name="IsIncludePosition" type="xs:boolean"/><xs:element minOccurs="0" name="IsIncludeSatatus" type="xs:boolean"/><xs:element minOccurs="0" name="IsIncludeTabNumber" type="xs:boolean"/><xs:element minOccurs="0" name="IsIncludeVehicleAny" type="xs:boolean"/><xs:element minOccurs="0" name="IsIncludeWorkSchedules" type="xs:boolean"/><xs:element minOccurs="0" name="IsIncludeWorkZones" type="xs:boolean"/></xs:sequence></xs:complexType><xs:element name="EmployeeShowColumn" nillable="true" type="tns:EmployeeShowColumn"/><xs:simpleType name="DocumentType"><xs:restriction base="xs:string"><xs:enumeration value="Passport"/><xs:enumeration value="DriverLicense"/><xs:enumeration value="ForeignPassport"/></xs:restriction></xs:simpleType><xs:element name="DocumentType" nillable="true" type="tns:DocumentType"/><xs:complexType name="ArrayOfAcsEmployeeSchedule"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeSchedule" nillable="true" type="tns:AcsEmployeeSchedule"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeeSchedule" nillable="true" type="tns:ArrayOfAcsEmployeeSchedule"/><xs:complexType name="AcsEmployeeSchedule"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeScheduleSaveData"><xs:sequence><xs:element minOccurs="0" name="ID" type="ser:guid"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeSchedule" nillable="true" type="tns:AcsEmployeeSchedule"/><xs:complexType name="AcsEmployeeScheduleSaveData"><xs:sequence><xs:element minOccurs="0" name="BeginDate" type="xs:dateTime"/><xs:element minOccurs="0" name="Description" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="EmployeeID" type="ser:guid"/><xs:element minOccurs="0" name="EndDate" type="xs:dateTime"/></xs:sequence></xs:complexType><xs:element name="AcsEmployeeScheduleSaveData" nillable="true" type="tns:AcsEmployeeScheduleSaveData"/><xs:complexType name="ArrayOfAcsEmployeeGroup"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeGroup" nillable="true" type="tns:AcsEmployeeGroup"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeeGroup" nillable="true" type="tns:ArrayOfAcsEmployeeGroup"/><xs:complexType name="AcsEmployeeGroup"><xs:sequence><xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="CreationDateTime" type="xs:dateTime"/><xs:element minOccurs="0" name="EmployeeGroups" nillable="true" type="tns:ArrayOfAcsEmployeeGroup"/><xs:element minOccurs="0" name="FavoriteName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="FavoritePath" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="GroupType" type="tns:EmployeeGroupType"/><xs:element minOccurs="0" name="ID" type="ser:guid"/><xs:element minOccurs="0" name="IsGuestGroup" type="xs:boolean"/><xs:element minOccurs="0" name="IsRemoved" type="xs:boolean"/><xs:element minOccurs="0" name="ModificationDateTime" type="xs:dateTime"/><xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="AcsEmployeeGroup" nillable="true" type="tns:AcsEmployeeGroup"/><xs:simpleType name="EmployeeGroupType"><xs:restriction base="xs:string"><xs:enumeration value="None"/><xs:enumeration value="GuestGroup"/><xs:enumeration value="Violators"/></xs:restriction></xs:simpleType><xs:element name="EmployeeGroupType" nillable="true" type="tns:EmployeeGroupType"/><xs:complexType name="AcsEmployeeGroupReactionInfo"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeGroup"><xs:sequence><xs:element minOccurs="0" name="EmployeeGroups1" nillable="true" type="tns:ArrayOfAcsEmployeeGroupReactionInfo"/><xs:element minOccurs="0" name="EmployeesFromGroupsGuids" nillable="true" type="q11:ArrayOfguid" xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/><xs:element minOccurs="0" name="SelectedEmployeesGuids" nillable="true" type="q12:ArrayOfguid" xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeGroupReactionInfo" nillable="true" type="tns:AcsEmployeeGroupReactionInfo"/><xs:complexType name="ArrayOfAcsEmployeeGroupReactionInfo"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeGroupReactionInfo" nillable="true" type="tns:AcsEmployeeGroupReactionInfo"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeeGroupReactionInfo" nillable="true" type="tns:ArrayOfAcsEmployeeGroupReactionInfo"/><xs:complexType name="AcsEmployeeGroupReportInfo"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeGroup"><xs:sequence><xs:element minOccurs="0" name="EmployeeGroups2" nillable="true" type="tns:ArrayOfAcsEmployeeGroupReportInfo"/><xs:element minOccurs="0" name="EmployeesFromGroupsGuids" nillable="true" type="q13:ArrayOfguid" xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/><xs:element minOccurs="0" name="SelectedEmployeesGuids" nillable="true" type="q14:ArrayOfguid" xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeGroupReportInfo" nillable="true" type="tns:AcsEmployeeGroupReportInfo"/><xs:complexType name="ArrayOfAcsEmployeeGroupReportInfo"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeGroupReportInfo" nillable="true" type="tns:AcsEmployeeGroupReportInfo"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeeGroupReportInfo" nillable="true" type="tns:ArrayOfAcsEmployeeGroupReportInfo"/><xs:complexType name="AcsEmployeeDocumentsData"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeDocumentsSaveData"><xs:sequence><xs:element minOccurs="0" name="ID" type="ser:guid"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeDocumentsData" nillable="true" type="tns:AcsEmployeeDocumentsData"/><xs:complexType name="AcsEmployeeDocumentsSaveData"><xs:sequence><xs:element minOccurs="0" name="DriverDateOfBirth" nillable="true" type="xs:dateTime"/><xs:element minOccurs="0" name="DriverDateOfExpiry" nillable="true" type="xs:dateTime"/><xs:element minOccurs="0" name="DriverDateOfIssue" nillable="true" type="xs:dateTime"/><xs:element minOccurs="0" name="DriverFirstName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="DriverLastName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="DriverMiddleName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="DriverNumber" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="DriverPlaceOfBirth" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="DriverSeries" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ForeignPassportCodeOfIssuingState" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ForeignPassportDateOfBirth" nillable="true" type="xs:dateTime"/><xs:element minOccurs="0" name="ForeignPassportDateOfExpiry" nillable="true" type="xs:dateTime"/><xs:element minOccurs="0" name="ForeignPassportFirstName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ForeignPassportLastName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ForeignPassportMRZ" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ForeignPassportMiddleName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ForeignPassportNationality" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ForeignPassportNumber" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ForeignPassportPersonalCode" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ForeignPassportSex" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportDateOfBirth" nillable="true" type="xs:dateTime"/><xs:element minOccurs="0" name="PassportDateOfIssue" nillable="true" type="xs:dateTime"/><xs:element minOccurs="0" name="PassportDepartmentCode" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportFirstName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportIssue" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportLastName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportMiddleName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportPlaceOfBirth" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportRegistrationAddress" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportSeries" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportSex" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="AcsEmployeeDocumentsSaveData" nillable="true" type="tns:AcsEmployeeDocumentsSaveData"/><xs:complexType name="AcsEmployeeFull"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeFullBase"><xs:sequence><xs:element minOccurs="0" name="CreationDateTime" type="xs:dateTime"/><xs:element minOccurs="0" name="EmployeeGroupID" type="ser:guid"/><xs:element minOccurs="0" name="EmployeeGroupPath" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ID" type="ser:guid"/><xs:element minOccurs="0" name="IsRemoved" type="xs:boolean"/><xs:element minOccurs="0" name="ModificationDateTime" type="xs:dateTime"/><xs:element minOccurs="0" name="Position" nillable="true" type="q15:LEmployeePositionInfo" xmlns:q15="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeFull" nillable="true" type="tns:AcsEmployeeFull"/><xs:complexType name="AcsEmployeeFullBase"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeSlimBase"><xs:sequence><xs:element minOccurs="0" name="Authority" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="DateOfIssue" nillable="true" type="xs:dateTime"/><xs:element minOccurs="0" name="PINCode" nillable="true" type="xs:long"/><xs:element minOccurs="0" name="PINCodeDescription" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PINCodeUnderPressure" nillable="true" type="xs:long"/><xs:element minOccurs="0" name="PINCodeUnderPressureDescription" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportIssue" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="RegistrationAddress" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ResidentialAddress" nillable="true" type="xs:string"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeFullBase" nillable="true" type="tns:AcsEmployeeFullBase"/><xs:complexType name="EmployeesInfoData2"><xs:sequence><xs:element minOccurs="0" name="Count" type="xs:long"/><xs:element minOccurs="0" name="Employees" nillable="true" type="tns:ArrayOfAcsEmployeeInfo"/><xs:element minOccurs="0" name="PageNumber" type="xs:int"/></xs:sequence></xs:complexType><xs:element name="EmployeesInfoData2" nillable="true" type="tns:EmployeesInfoData2"/><xs:complexType name="ArrayOfAcsEmployeeInfo"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeInfo" nillable="true" type="tns:AcsEmployeeInfo"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeeInfo" nillable="true" type="tns:ArrayOfAcsEmployeeInfo"/><xs:complexType name="AcsEmployeeInfo"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeSlimBase"><xs:sequence><xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="GroupID" type="ser:guid"/><xs:element minOccurs="0" name="GroupName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="GroupPath" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ID" type="ser:guid"/><xs:element minOccurs="0" name="PositionCode" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="PositionName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="SecurityGroupID" type="ser:guid"/><xs:element minOccurs="0" name="SecurityGroupName" nillable="true" type="xs:string"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeInfo" nillable="true" type="tns:AcsEmployeeInfo"/><xs:complexType name="AcsEmployeeFaceVectorFull"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeFaceVector"><xs:sequence><xs:element minOccurs="0" name="FaceVector" nillable="true" type="xs:base64Binary"/><xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary"/><xs:element minOccurs="0" name="Info" nillable="true" type="xs:string"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeFaceVectorFull" nillable="true" type="tns:AcsEmployeeFaceVectorFull"/><xs:complexType name="AcsEmployeeFaceVector"><xs:sequence><xs:element minOccurs="0" name="EmployeeID" type="ser:guid"/><xs:element minOccurs="0" name="ID" nillable="true" type="ser:guid"/><xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="SourceName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="SourcePath" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="SourceType" type="tns:FaceSourceType"/></xs:sequence></xs:complexType><xs:element name="AcsEmployeeFaceVector" nillable="true" type="tns:AcsEmployeeFaceVector"/><xs:simpleType name="FaceSourceType"><xs:restriction base="xs:string"><xs:enumeration value="Image"/><xs:enumeration value="Camera"/></xs:restriction></xs:simpleType><xs:element name="FaceSourceType" nillable="true" type="tns:FaceSourceType"/><xs:complexType name="ArrayOfAcsEmployeeFaceVector"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeFaceVector" nillable="true" type="tns:AcsEmployeeFaceVector"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeeFaceVector" nillable="true" type="tns:ArrayOfAcsEmployeeFaceVector"/><xs:complexType name="ArrayOfAcsEmployeeFaceVectorFull"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeFaceVectorFull" nillable="true" type="tns:AcsEmployeeFaceVectorFull"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeeFaceVectorFull" nillable="true" type="tns:ArrayOfAcsEmployeeFaceVectorFull"/><xs:complexType name="EmployeeInfo"><xs:sequence><xs:element minOccurs="0" name="EmployeeID" type="ser:guid"/><xs:element minOccurs="0" name="Fields" nillable="true" type="q16:ArrayOfVariableInfo" xmlns:q16="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/><xs:element minOccurs="0" name="Photo" nillable="true" type="xs:base64Binary"/></xs:sequence></xs:complexType><xs:element name="EmployeeInfo" nillable="true" type="tns:EmployeeInfo"/><xs:complexType name="ArrayOfEmployeeViewFieldMetadata"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="EmployeeViewFieldMetadata" nillable="true" type="tns:EmployeeViewFieldMetadata"/></xs:sequence></xs:complexType><xs:element name="ArrayOfEmployeeViewFieldMetadata" nillable="true" type="tns:ArrayOfEmployeeViewFieldMetadata"/><xs:complexType name="EmployeeViewFieldMetadata"><xs:complexContent mixed="false"><xs:extension base="tns:BaseViewFieldMetadata"><xs:sequence/></xs:extension></xs:complexContent></xs:complexType><xs:element name="EmployeeViewFieldMetadata" nillable="true" type="tns:EmployeeViewFieldMetadata"/><xs:complexType name="BaseViewFieldMetadata"><xs:sequence><xs:element minOccurs="0" name="FieldDBType" type="q17:SqlDbType" xmlns:q17="http://schemas.datacontract.org/2004/07/System.Data"/><xs:element minOccurs="0" name="FieldName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="FieldType" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="BaseViewFieldMetadata" nillable="true" type="tns:BaseViewFieldMetadata"/><xs:complexType name="ArrayOfAcsEmployeeFull"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeFull" nillable="true" type="tns:AcsEmployeeFull"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeeFull" nillable="true" type="tns:ArrayOfAcsEmployeeFull"/><xs:complexType name="ArrayOfAcsEmployeePhotosInfo"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeePhotosInfo" nillable="true" type="tns:AcsEmployeePhotosInfo"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeePhotosInfo" nillable="true" type="tns:ArrayOfAcsEmployeePhotosInfo"/><xs:complexType name="AcsEmployeePhotosInfo"><xs:sequence><xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="Id" type="ser:guid"/><xs:element minOccurs="0" name="IsRemoved" type="xs:boolean"/><xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="Photos" nillable="true" type="tns:ArrayOfAscEmployeePhotoModificationDateTimeInfo"/><xs:element minOccurs="0" name="SecondName" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="AcsEmployeePhotosInfo" nillable="true" type="tns:AcsEmployeePhotosInfo"/><xs:complexType name="ArrayOfAscEmployeePhotoModificationDateTimeInfo"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AscEmployeePhotoModificationDateTimeInfo" nillable="true" type="tns:AscEmployeePhotoModificationDateTimeInfo"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAscEmployeePhotoModificationDateTimeInfo" nillable="true" type="tns:ArrayOfAscEmployeePhotoModificationDateTimeInfo"/><xs:complexType name="AscEmployeePhotoModificationDateTimeInfo"><xs:sequence><xs:element minOccurs="0" name="ModificationDateTime" type="xs:dateTime"/><xs:element minOccurs="0" name="PhotoNumber" type="xs:int"/></xs:sequence></xs:complexType><xs:element name="AscEmployeePhotoModificationDateTimeInfo" nillable="true" type="tns:AscEmployeePhotoModificationDateTimeInfo"/><xs:simpleType name="EmployeeImageType"><xs:restriction base="xs:string"><xs:enumeration value="Photo"/><xs:enumeration value="PassportImage"/><xs:enumeration value="DriverLicenseImage"/><xs:enumeration value="ForeignPassportImage"/></xs:restriction></xs:simpleType><xs:element name="EmployeeImageType" nillable="true" type="tns:EmployeeImageType"/><xs:complexType name="ArrayOfEmployeeShortInfo"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="EmployeeShortInfo" nillable="true" type="tns:EmployeeShortInfo"/></xs:sequence></xs:complexType><xs:element name="ArrayOfEmployeeShortInfo" nillable="true" type="tns:ArrayOfEmployeeShortInfo"/><xs:complexType name="EmployeeShortInfo"><xs:sequence><xs:element minOccurs="0" name="EmployeeGroup" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="EmployeeGroupID" type="ser:guid"/><xs:element minOccurs="0" name="FIO" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ID" type="ser:guid"/></xs:sequence></xs:complexType><xs:element name="EmployeeShortInfo" nillable="true" type="tns:EmployeeShortInfo"/><xs:complexType name="ArrayOfEmployeeModificationInfo"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="EmployeeModificationInfo" nillable="true" type="tns:EmployeeModificationInfo"/></xs:sequence></xs:complexType><xs:element name="ArrayOfEmployeeModificationInfo" nillable="true" type="tns:ArrayOfEmployeeModificationInfo"/><xs:complexType name="EmployeeModificationInfo"><xs:sequence><xs:element minOccurs="0" name="ID" type="ser:guid"/><xs:element minOccurs="0" name="IsRemoved" type="xs:boolean"/><xs:element minOccurs="0" name="ModificationDateTime" type="xs:dateTime"/></xs:sequence></xs:complexType><xs:element name="EmployeeModificationInfo" nillable="true" type="tns:EmployeeModificationInfo"/><xs:complexType name="AcsEmployeeSaveData"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeFullBase"><xs:sequence><xs:element minOccurs="0" name="EmployeePositionID" nillable="true" type="ser:guid"/><xs:element minOccurs="0" name="IsChangeLocked" type="xs:boolean"/><xs:element minOccurs="0" name="IsChangePin" type="xs:boolean"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeSaveData" nillable="true" type="tns:AcsEmployeeSaveData"/><xs:simpleType name="EmployeesSortedColumn"><xs:restriction base="xs:string"><xs:enumeration value="None"/><xs:enumeration value="ID"/><xs:enumeration value="FIO"/><xs:enumeration value="EmployeeGroup"/><xs:enumeration value="Position"/><xs:enumeration value="TabNumber"/></xs:restriction></xs:simpleType><xs:element name="EmployeesSortedColumn" nillable="true" type="tns:EmployeesSortedColumn"/><xs:complexType name="EmployeesData"><xs:sequence><xs:element minOccurs="0" name="Employees" nillable="true" type="tns:ArrayOfEmployeeCurentInfo"/><xs:element minOccurs="0" name="PageNumber" type="xs:int"/><xs:element minOccurs="0" name="PageSize" type="xs:int"/><xs:element minOccurs="0" name="TotalCount" type="xs:int"/></xs:sequence></xs:complexType><xs:element name="EmployeesData" nillable="true" type="tns:EmployeesData"/><xs:complexType name="ArrayOfEmployeeCurentInfo"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="EmployeeCurentInfo" nillable="true" type="tns:EmployeeCurentInfo"/></xs:sequence></xs:complexType><xs:element name="ArrayOfEmployeeCurentInfo" nillable="true" type="tns:ArrayOfEmployeeCurentInfo"/><xs:complexType name="EmployeeCurentInfo"><xs:sequence><xs:element minOccurs="0" name="EmployeeGroup" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="FIO" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="ID" type="ser:guid"/><xs:element minOccurs="0" name="Position" nillable="true" type="xs:string"/><xs:element minOccurs="0" name="TabNumber" nillable="true" type="xs:int"/></xs:sequence></xs:complexType><xs:element name="EmployeeCurentInfo" nillable="true" type="tns:EmployeeCurentInfo"/><xs:complexType name="ArrayOfAcsEmployeeFaceVectorSaveData"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeFaceVectorSaveData" nillable="true" type="tns:AcsEmployeeFaceVectorSaveData"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAcsEmployeeFaceVectorSaveData" nillable="true" type="tns:ArrayOfAcsEmployeeFaceVectorSaveData"/><xs:complexType name="AcsEmployeeFaceVectorSaveData"><xs:complexContent mixed="false"><xs:extension base="tns:AcsEmployeeFaceVectorFull"><xs:sequence/></xs:extension></xs:complexContent></xs:complexType><xs:element name="AcsEmployeeFaceVectorSaveData" nillable="true" type="tns:AcsEmployeeFaceVectorSaveData"/><xs:complexType name="ArrayOfAttachedEmployeesForVehicle"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded" name="AttachedEmployeesForVehicle" nillable="true" type="tns:AttachedEmployeesForVehicle"/></xs:sequence></xs:complexType><xs:element name="ArrayOfAttachedEmployeesForVehicle" nillable="true" type="tns:ArrayOfAttachedEmployeesForVehicle"/><xs:complexType name="AttachedEmployeesForVehicle"><xs:sequence><xs:element minOccurs="0" name="BeginDateTime" nillable="true" type="xs:dateTime"/><xs:element minOccurs="0" name="Employee" nillable="true" type="tns:AcsEmployeeFull"/><xs:element minOccurs="0" name="EndDateTime" nillable="true" type="xs:dateTime"/></xs:sequence></xs:complexType><xs:element name="AttachedEmployeesForVehicle" nillable="true" type="tns:AttachedEmployeesForVehicle"/></xs:schema>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified"
+           targetNamespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.Employees"
+           xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+    <xs:import schemaLocation="xsd1.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+    <xs:import schemaLocation="xsd19.xsd"
+               namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AlcoGroup"/>
+    <xs:import schemaLocation="xsd16.xsd"
+               namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+    <xs:import schemaLocation="xsd25.xsd"
+               namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AccessLevels"/>
+    <xs:import schemaLocation="xsd17.xsd"
+               namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AcsKeys"/>
+    <xs:import schemaLocation="xsd27.xsd"
+               namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS"/>
+    <xs:import schemaLocation="xsd14.xsd"
+               namespace="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.TimeTracking"/>
+    <xs:import schemaLocation="xsd2.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+    <xs:import schemaLocation="xsd51.xsd" namespace="http://schemas.datacontract.org/2004/07/System.Data"/>
+    <xs:complexType name="SearchCondition">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="AddField" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="AdditionalFieldID" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="AlcoGroupID" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="AssignmentFilter" type="q1:AssignmentFilter"
+                        xmlns:q1="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AlcoGroup"/>
+            <xs:element minOccurs="0" name="Birthday" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="CurrentSort" type="tns:EmployeeSortedColumn"/>
+            <xs:element minOccurs="0" name="DrivingLicenseNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="EmployeeAssignmentType" type="q2:EmployeeAssignmentType"
+                        xmlns:q2="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AlcoGroup"/>
+            <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="GroupID" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="IncludeRemoved" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="InternationalPassportNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="IsFullMatch" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsGlobalSearch" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="KeyDescription" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="KeyNumber" nillable="true" type="xs:long"/>
+            <xs:element minOccurs="0" name="KeySortNumer" type="xs:int"/>
+            <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="SearchWay" type="tns:SearchWay"/>
+            <xs:element minOccurs="0" name="SecondName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="SortOrder" type="q3:SortOrder"
+                        xmlns:q3="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="TableNumber" nillable="true" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="SearchCondition" nillable="true" type="tns:SearchCondition"/>
+    <xs:simpleType name="EmployeeSortedColumn">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="FullName"/>
+            <xs:enumeration value="LastName"/>
+            <xs:enumeration value="FirstName"/>
+            <xs:enumeration value="SecondName"/>
+            <xs:enumeration value="TabNumber"/>
+            <xs:enumeration value="Position"/>
+            <xs:enumeration value="Satatus"/>
+            <xs:enumeration value="FirstKey"/>
+            <xs:enumeration value="SecondKey"/>
+            <xs:enumeration value="AccessLevel"/>
+            <xs:enumeration value="WorkSchedule"/>
+            <xs:enumeration value="WorkZone"/>
+            <xs:enumeration value="IsPhotoAny"/>
+            <xs:enumeration value="GroupPath"/>
+            <xs:enumeration value="ModificationDateTime"/>
+            <xs:enumeration value="CreationDateTime"/>
+            <xs:enumeration value="RowNumberKey"/>
+            <xs:enumeration value="AllKeys"/>
+            <xs:enumeration value="IsVehicleAny"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EmployeeSortedColumn" nillable="true" type="tns:EmployeeSortedColumn"/>
+    <xs:simpleType name="SearchWay">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FIO"/>
+            <xs:enumeration value="TableNumber"/>
+            <xs:enumeration value="Keys"/>
+            <xs:enumeration value="Email"/>
+            <xs:enumeration value="Phone"/>
+            <xs:enumeration value="Birthday"/>
+            <xs:enumeration value="PassportNumber"/>
+            <xs:enumeration value="AddField"/>
+            <xs:enumeration value="InternationalNumber"/>
+            <xs:enumeration value="DrivingLicenseNumber"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SearchWay" nillable="true" type="tns:SearchWay"/>
+    <xs:complexType name="ArrayOfAcsEmployee">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployee" nillable="true" type="tns:AcsEmployee"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployee" nillable="true" type="tns:ArrayOfAcsEmployee"/>
+    <xs:complexType name="AcsEmployee">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="EmployeeID" type="ser:guid"/>
+            <xs:element minOccurs="0" name="GroupID" type="ser:guid"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AcsEmployee" nillable="true" type="tns:AcsEmployee"/>
+    <xs:simpleType name="GroupTypeSearch">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Name"/>
+            <xs:enumeration value="Code"/>
+            <xs:enumeration value="Description"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="GroupTypeSearch" nillable="true" type="tns:GroupTypeSearch"/>
+    <xs:simpleType name="VehicleTypeSearch">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Name"/>
+            <xs:enumeration value="Brand"/>
+            <xs:enumeration value="RegistrationNumber"/>
+            <xs:enumeration value="Keys"/>
+            <xs:enumeration value="Color"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="VehicleTypeSearch" nillable="true" type="tns:VehicleTypeSearch"/>
+    <xs:complexType name="EmployeesInfoData">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Count" type="xs:long"/>
+            <xs:element minOccurs="0" name="Employees" nillable="true" type="tns:ArrayOfAcsEmployeeSlim"/>
+            <xs:element minOccurs="0" name="FoundIndex" type="xs:int"/>
+            <xs:element minOccurs="0" name="IsFound" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="PageNumber" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="EmployeesInfoData" nillable="true" type="tns:EmployeesInfoData"/>
+    <xs:complexType name="ArrayOfAcsEmployeeSlim">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeSlim" nillable="true"
+                        type="tns:AcsEmployeeSlim"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeeSlim" nillable="true" type="tns:ArrayOfAcsEmployeeSlim"/>
+    <xs:complexType name="AcsEmployeeSlim">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeSlimBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="AccessLevels" nillable="true"
+                                type="q4:ArrayOfAcsAccessLevelSlimInfo"
+                                xmlns:q4="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AccessLevels"/>
+                    <xs:element minOccurs="0" name="CreationDateTime" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="EmployeeGroupID" type="ser:guid"/>
+                    <xs:element minOccurs="0" name="EmployeeGroupPath" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ID" type="ser:guid"/>
+                    <xs:element minOccurs="0" name="IsAccessLevelsInherited" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="IsPhotoAny" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="IsRemoved" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="IsVehicleAny" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="IsWorkSchedulesInherited" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="IsWorkZonesInherited" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="Keys" nillable="true" type="q5:ArrayOfAcsKeyInfo"
+                                xmlns:q5="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS.AcsKeys"/>
+                    <xs:element minOccurs="0" name="ModificationDateTime" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="Position" nillable="true" type="q6:LEmployeePositionInfo"
+                                xmlns:q6="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS"/>
+                    <xs:element minOccurs="0" name="RowNumber" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="WorkSchedules" nillable="true" type="q7:ArrayOfWorkScheduleSlimInfo"
+                                xmlns:q7="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.TimeTracking"/>
+                    <xs:element minOccurs="0" name="WorkZones" nillable="true" type="q8:ArrayOfWorkZoneSlimInfo"
+                                xmlns:q8="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.TimeTracking"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeSlim" nillable="true" type="tns:AcsEmployeeSlim"/>
+    <xs:complexType name="AcsEmployeeSlimBase">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="IsLocked" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Number" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="SecondName" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeSlimBase" nillable="true" type="tns:AcsEmployeeSlimBase"/>
+    <xs:complexType name="EmployeesFilter">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="AccessLevelsIds" nillable="true" type="q9:ArrayOfguid"
+                        xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+            <xs:element minOccurs="0" name="CardTypesIds" nillable="true" type="q10:ArrayOfguid"
+                        xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+            <xs:element minOccurs="0" name="FirstNameContains" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="IsFirstNameSigned" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsFirstNameUnsigned" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsKeyCardTypeUnsigned" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsKeyNotValid" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsKeyNumber" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsKeySiteCode" nillable="true" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsKeyUnsigned" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsKeyValid" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsLastNameSigned" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsLastNameUnsigned" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsLock" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsSecondNameSigned" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsSecondNameUnsigned" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsShowEmptyAccessLevls" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsTabNumberSigned" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsTabNumberUnsigned" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsUnlock" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="KeyAfterSiteCode" nillable="true" type="xs:short"/>
+            <xs:element minOccurs="0" name="KeyCommentContains" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="KeyNumber" nillable="true" type="xs:long"/>
+            <xs:element minOccurs="0" name="KeySiteCode" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="LastNameContains" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="SecondNameContains" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="TabNumberContains" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="TabNumberEquals" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="EmployeesFilter" nillable="true" type="tns:EmployeesFilter"/>
+    <xs:complexType name="EmployeeShowColumn">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="IsIncludeAccessLevels" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsIncludeCreationDateTime" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsIncludeKeys" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsIncludeModificationDateTime" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsIncludePhotoAny" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsIncludePosition" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsIncludeSatatus" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsIncludeTabNumber" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsIncludeVehicleAny" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsIncludeWorkSchedules" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsIncludeWorkZones" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="EmployeeShowColumn" nillable="true" type="tns:EmployeeShowColumn"/>
+    <xs:simpleType name="DocumentType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Passport"/>
+            <xs:enumeration value="DriverLicense"/>
+            <xs:enumeration value="ForeignPassport"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="DocumentType" nillable="true" type="tns:DocumentType"/>
+    <xs:complexType name="ArrayOfAcsEmployeeSchedule">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeSchedule" nillable="true"
+                        type="tns:AcsEmployeeSchedule"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeeSchedule" nillable="true" type="tns:ArrayOfAcsEmployeeSchedule"/>
+    <xs:complexType name="AcsEmployeeSchedule">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeScheduleSaveData">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ID" type="ser:guid"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeSchedule" nillable="true" type="tns:AcsEmployeeSchedule"/>
+    <xs:complexType name="AcsEmployeeScheduleSaveData">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="BeginDate" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="EmployeeID" type="ser:guid"/>
+            <xs:element minOccurs="0" name="EndDate" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeScheduleSaveData" nillable="true" type="tns:AcsEmployeeScheduleSaveData"/>
+    <xs:complexType name="ArrayOfAcsEmployeeGroup">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeGroup" nillable="true"
+                        type="tns:AcsEmployeeGroup"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeeGroup" nillable="true" type="tns:ArrayOfAcsEmployeeGroup"/>
+    <xs:complexType name="AcsEmployeeGroup">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="CreationDateTime" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="EmployeeGroups" nillable="true" type="tns:ArrayOfAcsEmployeeGroup"/>
+            <xs:element minOccurs="0" name="FavoriteName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="FavoritePath" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="GroupType" type="tns:EmployeeGroupType"/>
+            <xs:element minOccurs="0" name="ID" type="ser:guid"/>
+            <xs:element minOccurs="0" name="IsGuestGroup" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="IsRemoved" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="ModificationDateTime" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeGroup" nillable="true" type="tns:AcsEmployeeGroup"/>
+    <xs:simpleType name="EmployeeGroupType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="GuestGroup"/>
+            <xs:enumeration value="Violators"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EmployeeGroupType" nillable="true" type="tns:EmployeeGroupType"/>
+    <xs:complexType name="AcsEmployeeGroupReactionInfo">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeGroup">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="EmployeeGroups1" nillable="true"
+                                type="tns:ArrayOfAcsEmployeeGroupReactionInfo"/>
+                    <xs:element minOccurs="0" name="EmployeesFromGroupsGuids" nillable="true" type="q11:ArrayOfguid"
+                                xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                    <xs:element minOccurs="0" name="SelectedEmployeesGuids" nillable="true" type="q12:ArrayOfguid"
+                                xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeGroupReactionInfo" nillable="true" type="tns:AcsEmployeeGroupReactionInfo"/>
+    <xs:complexType name="ArrayOfAcsEmployeeGroupReactionInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeGroupReactionInfo" nillable="true"
+                        type="tns:AcsEmployeeGroupReactionInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeeGroupReactionInfo" nillable="true"
+                type="tns:ArrayOfAcsEmployeeGroupReactionInfo"/>
+    <xs:complexType name="AcsEmployeeGroupReportInfo">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeGroup">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="EmployeeGroups2" nillable="true"
+                                type="tns:ArrayOfAcsEmployeeGroupReportInfo"/>
+                    <xs:element minOccurs="0" name="EmployeesFromGroupsGuids" nillable="true" type="q13:ArrayOfguid"
+                                xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                    <xs:element minOccurs="0" name="SelectedEmployeesGuids" nillable="true" type="q14:ArrayOfguid"
+                                xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeGroupReportInfo" nillable="true" type="tns:AcsEmployeeGroupReportInfo"/>
+    <xs:complexType name="ArrayOfAcsEmployeeGroupReportInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeGroupReportInfo" nillable="true"
+                        type="tns:AcsEmployeeGroupReportInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeeGroupReportInfo" nillable="true" type="tns:ArrayOfAcsEmployeeGroupReportInfo"/>
+    <xs:complexType name="AcsEmployeeDocumentsData">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeDocumentsSaveData">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ID" type="ser:guid"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeDocumentsData" nillable="true" type="tns:AcsEmployeeDocumentsData"/>
+    <xs:complexType name="AcsEmployeeDocumentsSaveData">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="DriverDateOfBirth" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="DriverDateOfExpiry" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="DriverDateOfIssue" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="DriverFirstName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="DriverLastName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="DriverMiddleName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="DriverNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="DriverPlaceOfBirth" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="DriverSeries" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ForeignPassportCodeOfIssuingState" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ForeignPassportDateOfBirth" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="ForeignPassportDateOfExpiry" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="ForeignPassportFirstName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ForeignPassportLastName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ForeignPassportMRZ" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ForeignPassportMiddleName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ForeignPassportNationality" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ForeignPassportNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ForeignPassportPersonalCode" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ForeignPassportSex" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportDateOfBirth" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="PassportDateOfIssue" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="PassportDepartmentCode" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportFirstName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportIssue" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportLastName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportMiddleName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportPlaceOfBirth" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportRegistrationAddress" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportSeries" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="PassportSex" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeDocumentsSaveData" nillable="true" type="tns:AcsEmployeeDocumentsSaveData"/>
+    <xs:complexType name="AcsEmployeeFull">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeFullBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="CreationDateTime" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="EmployeeGroupID" type="ser:guid"/>
+                    <xs:element minOccurs="0" name="EmployeeGroupPath" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ID" type="ser:guid"/>
+                    <xs:element minOccurs="0" name="IsRemoved" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="ModificationDateTime" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="Position" nillable="true" type="q15:LEmployeePositionInfo"
+                                xmlns:q15="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity.ACS"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeFull" nillable="true" type="tns:AcsEmployeeFull"/>
+    <xs:complexType name="AcsEmployeeFullBase">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeSlimBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Authority" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="DateOfIssue" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="PINCode" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="PINCodeDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PINCodeUnderPressure" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="PINCodeUnderPressureDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PassportIssue" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="RegistrationAddress" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ResidentialAddress" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeFullBase" nillable="true" type="tns:AcsEmployeeFullBase"/>
+    <xs:complexType name="EmployeesInfoData2">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Count" type="xs:long"/>
+            <xs:element minOccurs="0" name="Employees" nillable="true" type="tns:ArrayOfAcsEmployeeInfo"/>
+            <xs:element minOccurs="0" name="PageNumber" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="EmployeesInfoData2" nillable="true" type="tns:EmployeesInfoData2"/>
+    <xs:complexType name="ArrayOfAcsEmployeeInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeInfo" nillable="true"
+                        type="tns:AcsEmployeeInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeeInfo" nillable="true" type="tns:ArrayOfAcsEmployeeInfo"/>
+    <xs:complexType name="AcsEmployeeInfo">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeSlimBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="GroupID" type="ser:guid"/>
+                    <xs:element minOccurs="0" name="GroupName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="GroupPath" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ID" type="ser:guid"/>
+                    <xs:element minOccurs="0" name="PositionCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PositionName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="SecurityGroupID" type="ser:guid"/>
+                    <xs:element minOccurs="0" name="SecurityGroupName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeInfo" nillable="true" type="tns:AcsEmployeeInfo"/>
+    <xs:complexType name="AcsEmployeeFaceVectorFull">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeFaceVector">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="FaceVector" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="Info" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeFaceVectorFull" nillable="true" type="tns:AcsEmployeeFaceVectorFull"/>
+    <xs:complexType name="AcsEmployeeFaceVector">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="EmployeeID" type="ser:guid"/>
+            <xs:element minOccurs="0" name="ID" nillable="true" type="ser:guid"/>
+            <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="SourceName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="SourcePath" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="SourceType" type="tns:FaceSourceType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeFaceVector" nillable="true" type="tns:AcsEmployeeFaceVector"/>
+    <xs:simpleType name="FaceSourceType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Image"/>
+            <xs:enumeration value="Camera"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="FaceSourceType" nillable="true" type="tns:FaceSourceType"/>
+    <xs:complexType name="ArrayOfAcsEmployeeFaceVector">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeFaceVector" nillable="true"
+                        type="tns:AcsEmployeeFaceVector"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeeFaceVector" nillable="true" type="tns:ArrayOfAcsEmployeeFaceVector"/>
+    <xs:complexType name="ArrayOfAcsEmployeeFaceVectorFull">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeFaceVectorFull" nillable="true"
+                        type="tns:AcsEmployeeFaceVectorFull"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeeFaceVectorFull" nillable="true" type="tns:ArrayOfAcsEmployeeFaceVectorFull"/>
+    <xs:complexType name="EmployeeInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="EmployeeID" type="ser:guid"/>
+            <xs:element minOccurs="0" name="Fields" nillable="true" type="q16:ArrayOfVariableInfo"
+                        xmlns:q16="http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.DAL.Entities.Entity"/>
+            <xs:element minOccurs="0" name="Photo" nillable="true" type="xs:base64Binary"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="EmployeeInfo" nillable="true" type="tns:EmployeeInfo"/>
+    <xs:complexType name="ArrayOfEmployeeViewFieldMetadata">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="EmployeeViewFieldMetadata" nillable="true"
+                        type="tns:EmployeeViewFieldMetadata"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfEmployeeViewFieldMetadata" nillable="true" type="tns:ArrayOfEmployeeViewFieldMetadata"/>
+    <xs:complexType name="EmployeeViewFieldMetadata">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseViewFieldMetadata">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="EmployeeViewFieldMetadata" nillable="true" type="tns:EmployeeViewFieldMetadata"/>
+    <xs:complexType name="BaseViewFieldMetadata">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="FieldDBType" type="q17:SqlDbType"
+                        xmlns:q17="http://schemas.datacontract.org/2004/07/System.Data"/>
+            <xs:element minOccurs="0" name="FieldName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="FieldType" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="BaseViewFieldMetadata" nillable="true" type="tns:BaseViewFieldMetadata"/>
+    <xs:complexType name="ArrayOfAcsEmployeeFull">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeFull" nillable="true"
+                        type="tns:AcsEmployeeFull"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeeFull" nillable="true" type="tns:ArrayOfAcsEmployeeFull"/>
+    <xs:complexType name="ArrayOfAcsEmployeePhotosInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeePhotosInfo" nillable="true"
+                        type="tns:AcsEmployeePhotosInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeePhotosInfo" nillable="true" type="tns:ArrayOfAcsEmployeePhotosInfo"/>
+    <xs:complexType name="AcsEmployeePhotosInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Id" type="ser:guid"/>
+            <xs:element minOccurs="0" name="IsRemoved" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Photos" nillable="true"
+                        type="tns:ArrayOfAscEmployeePhotoModificationDateTimeInfo"/>
+            <xs:element minOccurs="0" name="SecondName" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AcsEmployeePhotosInfo" nillable="true" type="tns:AcsEmployeePhotosInfo"/>
+    <xs:complexType name="ArrayOfAscEmployeePhotoModificationDateTimeInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AscEmployeePhotoModificationDateTimeInfo"
+                        nillable="true" type="tns:AscEmployeePhotoModificationDateTimeInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAscEmployeePhotoModificationDateTimeInfo" nillable="true"
+                type="tns:ArrayOfAscEmployeePhotoModificationDateTimeInfo"/>
+    <xs:complexType name="AscEmployeePhotoModificationDateTimeInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ModificationDateTime" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="PhotoNumber" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AscEmployeePhotoModificationDateTimeInfo" nillable="true"
+                type="tns:AscEmployeePhotoModificationDateTimeInfo"/>
+    <xs:simpleType name="EmployeeImageType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Photo"/>
+            <xs:enumeration value="PassportImage"/>
+            <xs:enumeration value="DriverLicenseImage"/>
+            <xs:enumeration value="ForeignPassportImage"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EmployeeImageType" nillable="true" type="tns:EmployeeImageType"/>
+    <xs:complexType name="ArrayOfEmployeeShortInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="EmployeeShortInfo" nillable="true"
+                        type="tns:EmployeeShortInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfEmployeeShortInfo" nillable="true" type="tns:ArrayOfEmployeeShortInfo"/>
+    <xs:complexType name="EmployeeShortInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="EmployeeGroup" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="EmployeeGroupID" type="ser:guid"/>
+            <xs:element minOccurs="0" name="FIO" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ID" type="ser:guid"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="EmployeeShortInfo" nillable="true" type="tns:EmployeeShortInfo"/>
+    <xs:complexType name="ArrayOfEmployeeModificationInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="EmployeeModificationInfo" nillable="true"
+                        type="tns:EmployeeModificationInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfEmployeeModificationInfo" nillable="true" type="tns:ArrayOfEmployeeModificationInfo"/>
+    <xs:complexType name="EmployeeModificationInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ID" type="ser:guid"/>
+            <xs:element minOccurs="0" name="IsRemoved" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="ModificationDateTime" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="EmployeeModificationInfo" nillable="true" type="tns:EmployeeModificationInfo"/>
+    <xs:complexType name="AcsEmployeeSaveData">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeFullBase">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="EmployeePositionID" nillable="true" type="ser:guid"/>
+                    <xs:element minOccurs="0" name="IsChangeLocked" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="IsChangePin" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeSaveData" nillable="true" type="tns:AcsEmployeeSaveData"/>
+    <xs:simpleType name="EmployeesSortedColumn">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="ID"/>
+            <xs:enumeration value="FIO"/>
+            <xs:enumeration value="EmployeeGroup"/>
+            <xs:enumeration value="Position"/>
+            <xs:enumeration value="TabNumber"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EmployeesSortedColumn" nillable="true" type="tns:EmployeesSortedColumn"/>
+    <xs:complexType name="EmployeesData">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Employees" nillable="true" type="tns:ArrayOfEmployeeCurentInfo"/>
+            <xs:element minOccurs="0" name="PageNumber" type="xs:int"/>
+            <xs:element minOccurs="0" name="PageSize" type="xs:int"/>
+            <xs:element minOccurs="0" name="TotalCount" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="EmployeesData" nillable="true" type="tns:EmployeesData"/>
+    <xs:complexType name="ArrayOfEmployeeCurentInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="EmployeeCurentInfo" nillable="true"
+                        type="tns:EmployeeCurentInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfEmployeeCurentInfo" nillable="true" type="tns:ArrayOfEmployeeCurentInfo"/>
+    <xs:complexType name="EmployeeCurentInfo">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="EmployeeGroup" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="FIO" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ID" type="ser:guid"/>
+            <xs:element minOccurs="0" name="Position" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="TabNumber" nillable="true" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="EmployeeCurentInfo" nillable="true" type="tns:EmployeeCurentInfo"/>
+    <xs:complexType name="ArrayOfAcsEmployeeFaceVectorSaveData">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AcsEmployeeFaceVectorSaveData" nillable="true"
+                        type="tns:AcsEmployeeFaceVectorSaveData"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAcsEmployeeFaceVectorSaveData" nillable="true"
+                type="tns:ArrayOfAcsEmployeeFaceVectorSaveData"/>
+    <xs:complexType name="AcsEmployeeFaceVectorSaveData">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:AcsEmployeeFaceVectorFull">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="AcsEmployeeFaceVectorSaveData" nillable="true" type="tns:AcsEmployeeFaceVectorSaveData"/>
+    <xs:complexType name="ArrayOfAttachedEmployeesForVehicle">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="AttachedEmployeesForVehicle" nillable="true"
+                        type="tns:AttachedEmployeesForVehicle"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfAttachedEmployeesForVehicle" nillable="true"
+                type="tns:ArrayOfAttachedEmployeesForVehicle"/>
+    <xs:complexType name="AttachedEmployeesForVehicle">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="BeginDateTime" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="Employee" nillable="true" type="tns:AcsEmployeeFull"/>
+            <xs:element minOccurs="0" name="EndDateTime" nillable="true" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AttachedEmployeesForVehicle" nillable="true" type="tns:AttachedEmployeesForVehicle"/>
+</xs:schema>
