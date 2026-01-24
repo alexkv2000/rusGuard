@@ -5,6 +5,7 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfint;
 import com.rusguard.client.*;
 import com.rusguard.client.ILNetworkConfigurationService;
 
+import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.namespace.QName;
 
 import jakarta.xml.bind.JAXBElement;
@@ -38,6 +39,9 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import org.apache.wss4j.common.ext.WSPasswordCallback;
 import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity.*;
 import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity_acs.*;
+import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity_acs_accesslevels.AcsAccessPointDriverInfo;
+import org.datacontract.schemas._2004._07.vviinvestment_rusguard_dal_entities_entity_acs_accesslevels.ArrayOfAcsAccessPointDriverInfo;
+import org.datacontract.schemas._2004._07.vviinvestment_rusguard_net_services.DeviceCallMethodOperation;
 import org.tempuri.LNetworkService;
 
 import java.io.IOException;
@@ -468,7 +472,7 @@ public class RusGuardAcsIntegrationSample {
     }
 
 
-    public static AcsEmployeeFull getAcsEmployee(String id) {
+    public static AcsEmployeeFull getAcsEmployee(String id) { //Получить полные данные о сотруднике
 
         try {
 
@@ -485,7 +489,7 @@ public class RusGuardAcsIntegrationSample {
     }
 
 
-    public static AcsEmployeeSlim addAcsEmployee(String employeeGroupID, AcsEmployeeSaveData data) {
+    public static AcsEmployeeSlim addAcsEmployee(String employeeGroupID, AcsEmployeeSaveData data) { // Добавление сотрудников в группу
         try {
             return networkCnfgService.addAcsEmployee(String.valueOf(UUID.fromString(employeeGroupID)), data);
         } catch (Exception e) {
@@ -495,7 +499,7 @@ public class RusGuardAcsIntegrationSample {
     }
 
 
-    public static void saveAcsEmployee(String id, AcsEmployeeSaveData data) {
+    public static void saveAcsEmployee(String id, AcsEmployeeSaveData data) { //Сохранить данные сотрудника
         try {
             networkCnfgService.saveAcsEmployee(String.valueOf(UUID.fromString(id)), data);
         } catch (Exception e) {
@@ -504,7 +508,7 @@ public class RusGuardAcsIntegrationSample {
         }
     }
 
-    public static void removeAcsEmployee(String id) {
+    public static void removeAcsEmployee(String id) { //Удаление сотрудника
         try {
             networkCnfgService.removeAcsEmployee(String.valueOf(UUID.fromString(id)));
         } catch (Exception e) {
@@ -514,8 +518,12 @@ public class RusGuardAcsIntegrationSample {
     }
 
 
-    public static void setAcsEmployeePhoto(String employeeId, int photoNumber, byte[] data) {
+    public static void setAcsEmployeePhoto(String employeeId, int photoNumber, byte[] data) { // Добавить фотографию сотруднику, удалить фотографию у сотрудника
         try {
+            //photoNumber - параметр, указывающий номер(поизицию фотографии), нумерация начинается с еденицы.
+            //В настройках сервисов есть ограничение на объем передаваемых данных в параметре data,
+            //data не должно превышать 4 Mb
+            //Для удаления фотографии с позицией, указанной в photoNumber, в параметре data следует указать null
             networkCnfgService.setAcsEmployeePhoto(String.valueOf(UUID.fromString(employeeId)), photoNumber, data, true);
         } catch (Exception e) {
             System.err.println("Ошибка установки фото: " + e.getMessage());
@@ -524,7 +532,7 @@ public class RusGuardAcsIntegrationSample {
     }
 
 
-    public static void addAccessLevelsToEmployee(String employeeID, String[] accessLevelIDs) {
+    public static void addAccessLevelsToEmployee(String employeeID, String[] accessLevelIDs) { // Назначить уровни доступа сотруднику
         try {
             // Convert String[] to ArrayOfguid
             ArrayOfguid arrayOfGuid = new ArrayOfguid();
@@ -539,7 +547,7 @@ public class RusGuardAcsIntegrationSample {
     }
 
 
-    public static void removeAccessLevelFromEmployee(String employeeID, String[] accessLevelIDs) {
+    public static void removeAccessLevelFromEmployee(String employeeID, String[] accessLevelIDs) { // Удалить уровни доступа у сотрудника
         try {
             // Create ArrayOfguid object
             ArrayOfguid arrayOfGuid = new ArrayOfguid();
@@ -551,8 +559,8 @@ public class RusGuardAcsIntegrationSample {
         }
     }
 
-    // Устанавливает флаг наследования доступов. Нужно снять (false) для ручного проставления доступа!!!
-    public static void setUseEmployeeParentAccessLevel(String employeeID, boolean isUseParentAccessLevel) {
+
+    public static void setUseEmployeeParentAccessLevel(String employeeID, boolean isUseParentAccessLevel) { // Устанавливает флаг наследования доступов. Нужно снять (false) для ручного проставления доступа!!!
         try {
             networkCnfgService.setUseEmployeeParentAccessLevel(
                     employeeID, // employeeID as String
@@ -580,7 +588,7 @@ public class RusGuardAcsIntegrationSample {
         lockAcsEmployee(ids, isLocked);
     }
 
-    public static void lockAcsEmployee(String[] ids, boolean isLocked) {
+    public static void lockAcsEmployee(String[] ids, boolean isLocked) { // Заблокировать или разблокировать сотрудников.
         try {
             if (networkCnfgService == null) {
                 throw new IllegalStateException("networkCnfgService is not initialized. Call initServices() first.");
@@ -601,8 +609,20 @@ public class RusGuardAcsIntegrationSample {
 // ================================
 // #region Работа с ключами
 // ================================
+    /* ВАЖНАЯ информация по работе с ключами
+     * 1. У сотрудника может быть назначено только два ключа с порядковыми номерами 1 и 2
+     *
+     * 2. Если дата начала и окончания действия ключа не указана(StartDate и EndDate соответственно) то считается, что ключ выдается
+     * на все время(действует бесконечно). Если указана только дата начала, то ключ действует с этой даты и до бесконечности.
+     * Если указана только дата окончания действия, то ключ действует с текущего момента до момента наступления даты окончания действия ключа.
+     *
+     * 3. При попытке назначить ключ сотруднику может возникнуть ситтуация, когда ключ уже назначен другому сотруднику.
+     * В этом случае допустимо воспользоваться методом ForceAssignAcsKeyForEmployee и переназначить ключ. Сценарий назначения ключа сотруднику в общем случает такой:
+     * Попытка назначить ключ посредством метода AssignAcsKeyForEmployee, если возникает исключение AssignmentAcsKeyException с типом ошибки AssignmentAcsKeyErrorType.AcsKeyAlreadyAssignedToAnotherEmployee,
+     * то принимается решение об продолжении операции назначения ключа посредством метода ForceAssignAcsKeyForEmployee, или отказе от операции
+     */
 
-    public static void removeKeyFromEmployee(String employeeId, int indexNumber) {
+    public static void removeKeyFromEmployee(String employeeId, int indexNumber) { // Забрать ключ у сотрудника
         try {
             networkCnfgService.assignAcsKeyForEmployee(employeeId, indexNumber, null, false);
         } catch (Exception e) {
@@ -611,7 +631,7 @@ public class RusGuardAcsIntegrationSample {
         }
     }
 
-    public static AcsKeyInfo assignAcsKeyForEmployee(String employeeId, int indexNumber, AcsKeySaveData keyData) {
+    public static AcsKeyInfo assignAcsKeyForEmployee(String employeeId, int indexNumber, AcsKeySaveData keyData) { // Привязать ключ к сотруднику с трактовкой операции как недопустимой, если ключ уже присвоен другому сотруднику.
         try {
             return networkCnfgService.assignAcsKeyForEmployee(employeeId, indexNumber, keyData, false);
         } catch (Exception e) {
@@ -620,7 +640,7 @@ public class RusGuardAcsIntegrationSample {
         }
     }
 
-    public static AcsKeyInfo forceAssignAcsKeyForEmployee(String employeeId, int indexNumber, AcsKeySaveData keyData) {
+    public static AcsKeyInfo forceAssignAcsKeyForEmployee(String employeeId, int indexNumber, AcsKeySaveData keyData) { // Привязать ключ к сотруднику. Если ключ уже присвоен другому сотруднику, то он у него будет сброшен.
         try {
             return networkCnfgService.forceAssignAcsKeyForEmployee(employeeId, indexNumber, keyData, false);
         } catch (Exception e) {
@@ -632,181 +652,199 @@ public class RusGuardAcsIntegrationSample {
 // ================================
 // #region Работа с событиями
 // ================================
+    /*  ВАЖНАЯ информация по работе с событиями
+     *  1. Для постоянного мониторинга событий, происходящих на сервере, фильтр по дате/времени использовать нельзя (время сервера и клиента могут различаться)
+     *  Каждое событие имеет номер, являющийся идентификатор записи(строки) в БД.
+     *  Идентификаторы инкриментируются, поэтому у позднего события идентификатор всегда больше, чем у раннего. В связи с чем сценарий мониторинга событий
+     *  сводится к цикличному вызову метода GetLastEvent, чтобы получить идентификатор последнего события, удовлетворяющего фильтру,
+     *  принятие его в качестве максимального значения идентификатора и затем цикличный вызов GetEvents,
+     *  поиск нового максимального идентификатора записи среди списка полученных событий, чтобы на последующей итерации вызвать метод,
+     *  указав в качестве параметра "с какой записи следует вычитка события" это идентификатор.
+     *  Следует устанавливать задержку между итерациями опроса. Величина задержки должна быть адекватна задаче, решаемой с помощью мониторинга событий.
+     *  Безостановочно вызывать серверный метод не стоит.
+     *
+     *  2. Если же требуется просто снять данные за определенный период времени, то следует вызвать GetEvents, указав в параметрах нужные даты.
+     *
+     *  3. ВАЖНО. Очень нежелательно (особенно это касается постоянного мониторинга) получать события, используя в качестве одного из фильтров идентификаторы точек доступа,
+     *  т.к. на реальном объекте их может быть не одна тысяча, что существенно замедляет выборку. Следует получить список точек доступа, после чего
+     *  сопоставлять идентификаторы устройств в событиях с идентификаторами полученных точек доступа. Следует учитывать, что список точек доступа хоть и достаточно редко
+     *  (часто на этапе пуско-наладки), но меняется, т.к. точки прохода периодически монтируются/демонтируются.
+     */
 
-//    public static void trackEvents(String[] accessPointsIds) throws DatatypeConfigurationException {
-//        // Use LogMsgType instead of LogMsgSubType
-//        LogMsgType[] filter = {
-//                LogMsgType.ALARM,
-//                LogMsgType.WARNING,
-//                LogMsgType.INFORMATION
-//        };
-//
-//        long counter = -1;
-//
-//        while (counter == -1) {
-//            // Pass null for subTypes parameter since we can't use LogMsgSubType
-//            LogData lastEvent = networkService.getLastEvent(null, null, toUuidArray(accessPointsIds), LogSubjectType.NONE);
-//
-//            if (lastEvent != null && lastEvent.getMessages() != null && !lastEvent.getMessages().isNil()) {
-//                ArrayOfLogMessage messages = lastEvent.getMessages().getValue();
-//                counter = messages.getLogMessage().stream()
-//                        .mapToLong(LogMessage::getId)
-//                        .max()
-//                        .orElse(-1);
-//            }
-//
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                Thread.currentThread().interrupt();
-//                return;
-//            }
-//        }
-//
-//        while (true) {
-//            // First, convert the filter array to ArrayOfLogMsgSubType
-//            ArrayOfLogMsgSubType msgSubTypes = new ArrayOfLogMsgSubType();
-//            for (LogMsgType subType : filter) {
-//                msgSubTypes.getLogMsgSubType().add(String.valueOf(subType));
-//            }
-//
-//// Convert Date to XMLGregorianCalendar
-//            XMLGregorianCalendar startDate = DatatypeFactory.newInstance()
-//                    .newXMLGregorianCalendar(new GregorianCalendar(1970, 0, 1)); // Equivalent to new Date(0)
-//            XMLGregorianCalendar endDate = DatatypeFactory.newInstance()
-//                    .newXMLGregorianCalendar(new GregorianCalendar(292278994, 7, 17)); // Far future date
-//
-//            LogData events = networkService.getEvents(
-//                    counter, // fromMessageId
-//                    startDate, // fromDateTime
-//                    endDate, // toDateTime
-//                    null, // msgTypes (ArrayOfLogMsgType)
-//                    msgSubTypes, // msgSubTypes (ArrayOfLogMsgSubType)
-//                    toUuidArray(accessPointsIds), // subjectIDs (ArrayOfguid)
-//                    LogSubjectType.NONE, // subjectType
-//                    0, // pageNumber
-//                    1000, // pageSize
-//                    LogMessageSortedColumn.DATE_TIME, // sortedColumn
-//                    SortOrder.ASCENDING // sortOrder
-//            );
-//            if (events != null && events.getMessages() != null) {
-//                for (LogMessage msg : events.getMessages().getValue().getLogMessage()) {
-//                    System.out.println("Event: " + msg.getMessage() +
-//                            " at " + msg.getDateTime() +
-//                            " type: " + msg.getLogMessageType());
-//                }
-//
-//                ArrayOfLogMessage messages = events.getMessages().getValue();
-//                if (messages != null && messages.getLogMessage() != null && !messages.getLogMessage().isEmpty()) {
-//                    List<LogMessage> messageList = messages.getLogMessage();
-//                    counter = messageList.get(messageList.size() - 1).getId() + 1;
-//                }
-//            }
-//
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                Thread.currentThread().interrupt();
-//                return;
-//            }
-//        }
-//    }
+    public static void trackEvents(String[] accessPointsIds) throws DatatypeConfigurationException { // Пример постоянного мониторинга событий для всех или определенных точек доступа по фильтру событий входа и выхода
+        // Use LogMsgType instead of LogMsgSubType
+        LogMsgType[] filter = {
+                LogMsgType.ALARM,
+                LogMsgType.WARNING,
+                LogMsgType.INFORMATION
+        };
+
+        long counter = -1;
+
+        while (counter == -1) {
+            // Pass null for subTypes parameter since we can't use LogMsgSubType
+            LogData lastEvent = networkService.getLastEvent(null, null, toUuidArray(accessPointsIds), LogSubjectType.NONE);
+
+            if (lastEvent != null && lastEvent.getMessages() != null && !lastEvent.getMessages().isNil()) {
+                ArrayOfLogMessage messages = lastEvent.getMessages().getValue();
+                counter = messages.getLogMessage().stream()
+                        .mapToLong(LogMessage::getId)
+                        .max()
+                        .orElse(-1);
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
+
+        while (true) {
+            // First, convert the filter array to ArrayOfLogMsgSubType
+            ArrayOfLogMsgSubType msgSubTypes = new ArrayOfLogMsgSubType();
+            for (LogMsgType subType : filter) {
+                msgSubTypes.getLogMsgSubType().add(String.valueOf(subType));
+            }
+
+// Convert Date to XMLGregorianCalendar
+            XMLGregorianCalendar startDate = DatatypeFactory.newInstance()
+                    .newXMLGregorianCalendar(new GregorianCalendar(1970, 0, 1)); // Equivalent to new Date(0)
+            XMLGregorianCalendar endDate = DatatypeFactory.newInstance()
+                    .newXMLGregorianCalendar(new GregorianCalendar(292278994, 7, 17)); // Far future date
+
+            LogData events = networkService.getEvents(
+                    counter, // fromMessageId
+                    startDate, // fromDateTime
+                    endDate, // toDateTime
+                    null, // msgTypes (ArrayOfLogMsgType)
+                    msgSubTypes, // msgSubTypes (ArrayOfLogMsgSubType)
+                    toUuidArray(accessPointsIds), // subjectIDs (ArrayOfguid)
+                    LogSubjectType.NONE, // subjectType
+                    0, // pageNumber
+                    1000, // pageSize
+                    LogMessageSortedColumn.DATE_TIME, // sortedColumn
+                    SortOrder.ASCENDING // sortOrder
+            );
+            if (events != null && events.getMessages() != null) {
+                for (LogMessage msg : events.getMessages().getValue().getLogMessage()) {
+                    System.out.println("Event: " + msg.getMessage() +
+                            " at " + msg.getDateTime() +
+                            " type: " + msg.getLogMessageType());
+                }
+
+                ArrayOfLogMessage messages = events.getMessages().getValue();
+                if (messages != null && messages.getLogMessage() != null && !messages.getLogMessage().isEmpty()) {
+                    List<LogMessage> messageList = messages.getLogMessage();
+                    counter = messageList.get(messageList.size() - 1).getId() + 1;
+                }
+            }
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
+    }
 
 
-//    public static LogData getEvents(String[] accessPointsIds) throws DatatypeConfigurationException {
-//        // Convert dates to XMLGregorianCalendar
-//        DatatypeFactory df = DatatypeFactory.newInstance();
-//        XMLGregorianCalendar beginDate = df.newXMLGregorianCalendar(new GregorianCalendar(2012, Calendar.JANUARY, 1));
-//        XMLGregorianCalendar endDate = df.newXMLGregorianCalendar(new GregorianCalendar(2012, Calendar.JANUARY, 31, 23, 59, 59));
-//
-//        // Create ArrayOfLogMsgType for message types
-//        ArrayOfLogMsgType msgTypes = new ArrayOfLogMsgType();
-//        // Create ArrayOfLogMsgSubType for message sub-types
-//        ArrayOfLogMsgSubType msgSubTypes = new ArrayOfLogMsgSubType();
-//
-//        // Convert access point IDs to ArrayOfguid
-//        ArrayOfguid deviceIDs = new ArrayOfguid();
-//        if (accessPointsIds != null) {
-//            for (String id : accessPointsIds) {
-//                deviceIDs.getGuid().add(id);
-//            }
-//        }
-//
-//        return networkService.getEventsByDeviceIDs(
-//                0L,                              // fromMessageId
-//                beginDate,                       // fromDateTime
-//                endDate,                         // toDateTime
-//                null,                            // msgTypes (ArrayOfLogMsgType)
-//                msgSubTypes,                     // msgSubTypes (ArrayOfLogMsgSubType)
-//                deviceIDs,                       // deviceIDs (ArrayOfguid)
-//                null,                            // subjectIDs (ArrayOfguid)
-//                LogSubjectType.NONE,             // subjectType
-//                0,                               // pageNumber
-//                1000,                            // pageSize
-//                LogMessageSortedColumn.DATE_TIME, // sortedColumn
-//                SortOrder.ASCENDING              // sortOrder
-//        );
-//    }
+    public static LogData getEvents(String[] accessPointsIds) throws DatatypeConfigurationException { // Пример получения событий для всех или определенных точек доступа по фильтру событий входа и выхода за январь
+        // Convert dates to XMLGregorianCalendar
+        DatatypeFactory df = DatatypeFactory.newInstance();
+        XMLGregorianCalendar beginDate = df.newXMLGregorianCalendar(new GregorianCalendar(2012, Calendar.JANUARY, 1));
+        XMLGregorianCalendar endDate = df.newXMLGregorianCalendar(new GregorianCalendar(2012, Calendar.JANUARY, 31, 23, 59, 59));
 
-//    public static AcsAccessPointDriverInfo[] getAccessPoints() {
-//        try {
-//            ArrayOfAcsAccessPointDriverInfo result = networkService.getAcsAccessPointDrivers();
-//            return result.getAcsAccessPointDriverInfo().toArray(new AcsAccessPointDriverInfo[0]);
-//        } catch (Exception e) {
-//            System.err.println("Ошибка получения точек доступа: " + e.getMessage());
-//            return new AcsAccessPointDriverInfo[0];
-//        }
-//    }
+        // Create ArrayOfLogMsgType for message types
+        ArrayOfLogMsgType msgTypes = new ArrayOfLogMsgType();
+        // Create ArrayOfLogMsgSubType for message sub-types
+        ArrayOfLogMsgSubType msgSubTypes = new ArrayOfLogMsgSubType();
+
+        // Convert access point IDs to ArrayOfguid
+        ArrayOfguid deviceIDs = new ArrayOfguid();
+        if (accessPointsIds != null) {
+            for (String id : accessPointsIds) {
+                deviceIDs.getGuid().add(id);
+            }
+        }
+
+        return networkService.getEventsByDeviceIDs(
+                0L,                              // fromMessageId
+                beginDate,                       // fromDateTime
+                endDate,                         // toDateTime
+                null,                            // msgTypes (ArrayOfLogMsgType)
+                msgSubTypes,                     // msgSubTypes (ArrayOfLogMsgSubType)
+                deviceIDs,                       // deviceIDs (ArrayOfguid)
+                null,                            // subjectIDs (ArrayOfguid)
+                LogSubjectType.NONE,             // subjectType
+                0,                               // pageNumber
+                1000,                            // pageSize
+                LogMessageSortedColumn.DATE_TIME, // sortedColumn
+                SortOrder.ASCENDING              // sortOrder
+        );
+    }
+
+    public static AcsAccessPointDriverInfo[] getAccessPoints() {
+        try {
+            ArrayOfAcsAccessPointDriverInfo result = networkService.getAcsAccessPointDrivers();
+            return result.getAcsAccessPointDriverInfo().toArray(new AcsAccessPointDriverInfo[0]);
+        } catch (Exception e) {
+            System.err.println("Ошибка получения точек доступа: " + e.getMessage());
+            return new AcsAccessPointDriverInfo[0];
+        }
+    }
 
     // ================================
 // #region Получение драйверов и отправка команд
 // ================================
-//    public static List<LDriverFullInfo> getAllDrivers() {
-//        try {
-//            List<LDriverFullInfo> result = new ArrayList<>();
-//            ArrayOfLNetInfo networks = networkService.getAllNets();
-//
-//            for (LNetInfo net : networks.getLNetInfo()) {
-//                ArrayOfLServerInfo servers = networkService.getNetServers(net.getId().toString());
-//
-//                for (LServerInfo server : servers.getLServerInfo()) {
-//                    ArrayOfLDriverFullInfo drivers = networkService.getServerDriversFullInfo(
-//                            server.getId().toString(),
-//                            null  // workplaceModuleId может быть null, если не требуется
-//                    );
-//                    result.addAll(drivers.getLDriverFullInfo());
-//                }
-//            }
-//            return result;
-//        } catch (Exception e) {
-//            System.err.println("Ошибка получения всех драйверов: " + e.getMessage());
-//            e.printStackTrace();  // Добавим вывод стека для отладки
-//            return new ArrayList<>();
-//        }
-//    }
+    public static List<LDriverFullInfo> getAllDrivers() { // Получить коллекцию всех драйверов устройств
+        try {
+            List<LDriverFullInfo> result = new ArrayList<>();
+            ArrayOfLNetInfo networks = networkService.getAllNets();
 
-//    public static AcsAccessPointDriverInfo[] getAccessPointsDrivers2() {
-//        return getAccessPoints();
-//    }
-    //отправляет команду (вызов метода) на устройство через SOAP-сервис networkService, используя операцию типа DeviceCallMethodOperation.
-//    public static void sendCommand(String connectionId, String commandName) {
-//        try {
-//            DeviceCallMethodOperation operation = new DeviceCallMethodOperation();
-//
-//            // Set the method name (command)
-//            operation.setMethodName(new JAXBElement<>(
-//                    new QName("http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.Net.Services.Entities", "MethodName"),
-//                    String.class,
-//                    commandName
-//            ));
-//
-//            // Process the operation
-//            networkService.process(operation, connectionId);
-//        } catch (Exception e) {
-//            System.err.println("Ошибка отправки команды: " + e.getMessage());
-//            throw new RuntimeException(e);
-//        }
-//    }
+            for (LNetInfo net : networks.getLNetInfo()) {
+                ArrayOfLServerInfo servers = networkService.getNetServers(net.getId().toString());
+
+                for (LServerInfo server : servers.getLServerInfo()) {
+                    ArrayOfLDriverFullInfo drivers = networkService.getServerDriversFullInfo(
+                            server.getId().toString(),
+                            null  // workplaceModuleId может быть null, если не требуется
+                    );
+                    result.addAll(drivers.getLDriverFullInfo());
+                }
+            }
+            return result;
+        } catch (Exception e) {
+            System.err.println("Ошибка получения всех драйверов: " + e.getMessage());
+            e.printStackTrace();  // Добавим вывод стека для отладки
+            return new ArrayList<>();
+        }
+    }
+
+    public static AcsAccessPointDriverInfo[] getAccessPointsDrivers2() { // Получение драйверов точек доступа, предварительно получив все дрйвера устройств. Лучше использовать GetAccessPointsDrivers2, т.к. набор типов точек доступа может расширяться.
+        return getAccessPoints();
+    }
+   // отправляет команду (вызов метода) на устройство через SOAP-сервис networkService, используя операцию типа DeviceCallMethodOperation.
+    public static void sendCommand(String connectionId, String commandName) { // Послать команду точке доступа
+        try {
+            DeviceCallMethodOperation operation = new DeviceCallMethodOperation();
+
+            // Set the method name (command)
+            operation.setMethodName(new JAXBElement<>(
+                    new QName("http://schemas.datacontract.org/2004/07/VVIInvestment.RusGuard.Net.Services.Entities", "MethodName"),
+                    String.class,
+                    commandName
+            ));
+
+            // Process the operation
+            networkService.process(operation, connectionId);
+        } catch (Exception e) {
+            System.err.println("Ошибка отправки команды: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 
     // Вспомогательный метод: преобразование String[] в UUID[]
     private static ArrayOfguid toUuidArray(String[] ids) {
@@ -1140,7 +1178,7 @@ public class RusGuardAcsIntegrationSample {
         return employeeData;
     }
 
-    private static List<AcsAccessLevelSlimInfo> getAccessLevelsSlim() {
+    private static List<AcsAccessLevelSlimInfo> getAccessLevelsSlim() { //Получение всех уровней доступа
         List<AcsAccessLevelSlimInfo> accessLevels = networkService.getAcsAccessLevelsSlimInfo().getAcsAccessLevelSlimInfo();
 
         return accessLevels.stream()
