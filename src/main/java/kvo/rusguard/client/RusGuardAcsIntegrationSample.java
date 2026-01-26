@@ -1012,7 +1012,7 @@ public class RusGuardAcsIntegrationSample {
 //TODO            for (int i = 0; i < 31; i++) {
 //TODO                getEmployeePassagesByDate("cc4990aa-b309-479e-a484-65e4abe80dfe", LocalDate.of(2026, 1, i+1)); //3.3. Поиск проходов по ID сотрудника
 //TODO            }
-            getEmployeePassagesByDate("4bf9f60a-da45-4646-b6cd-f8b0bdbaad75", LocalDate.of(2026, 1, 21)); // Поиск проходов по ID сотрудника
+            getEmployeePassagesByDate("4bf9f60a-da45-4646-b6cd-f8b0bdbaad75", LocalDate.of(2026, 1, 26)); // Поиск проходов по ID сотрудника
 
 //TODO            getAllEmployees(); //3.4. Поиск всех сотрудников
 
